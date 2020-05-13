@@ -1,0 +1,25 @@
+.Head {
+  float: left;
+  background-color: #111;
+  height: 100%
+}
+
+.Head a {
+  float: none;
+  display: block;
+  color: #f2f2f2;
+  text-align: left;
+  padding: 6px 20px 0px 10px;
+  text-decoration: none;
+  font-size: 14px
+}
+
+.Head a:hover {
+  background-color: #ddd;
+  color: black
+}
+
+.Head a.active {
+ color: white;
+ font-weight: 600;
+}

@@ -9,7 +9,8 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
-    "short-unique-id": "^2.0.7"
+    "short-unique-id": "^2.0.7",
+    "uuid": "^8.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,4 +1,23 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Programmer's Toolbox is a web site hosting various tools for the programmer.
+
+TODO:
+* HTML Encoder/Decoder
+* Base64 Encoder/Decoder
+* URL Encoder/Decoder
+* GUID/UUID generator
+* Short GUID genetator
+* Test data generator
+* Create account to save settings
+* Social login with Google or Facebook
+* Email login
+* Logos in manifest.json - do I need them?
+* Use SCSS or SASS
+* Toogle sidebar
+* When minimized - still show a thin sidebar
+* Lazy module
+
+Notes
+* Expandable sidebar based on [Bootstrap Sidebar](https://bootstrapious.com/p/bootstrap-sidebar)
 
 ## Available Scripts
 
