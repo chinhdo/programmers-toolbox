@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './uuid-gen.styles.css'
 import { v4 as uuidv4 } from 'uuid';
+import { Footer } from '../shared/footer.component';
 
 class UuidGen extends Component {
   constructor(props) {
@@ -58,7 +59,7 @@ class UuidGen extends Component {
               We've created a few UUIDs for you. Click Generate to create more.
             </div>            
           </div>
-
+          <Footer/>
         </div>
         <textarea id="ClipboardHelper"></textarea>
       </div>

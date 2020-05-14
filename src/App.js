@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import { SideBar } from './components/shared/sidebar.component';
-import { HtmlEncoder } from './components/html-encoder/html-encoder.component';
-import { Footer } from './components/shared/footer.component';
 import UuidGen from './components/uuid-gen/uuid-gen.component';
 
 class App extends Component {
@@ -21,8 +19,7 @@ class App extends Component {
       <div className="App">
         <SideBar />
         <UuidGen />
-        {/* <HtmlEncoder /> */}
-        {/* <Footer/> */}
+        {/* <HtmlEncoder /> */}        
       </div>
     );
 

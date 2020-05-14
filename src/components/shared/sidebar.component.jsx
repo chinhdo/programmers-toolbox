@@ -41,10 +41,7 @@ export class SideBar extends Component {
             <a href="#a">
               <i className="fas fa-question"></i>FAQ</a>
           </li>
-        </ul>
-        <div className="sidebar-footer">
-          <button>Just a Button</button>
-        </div>
+        </ul>        
       </nav>
     );
   }
