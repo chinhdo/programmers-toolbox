@@ -92,7 +92,7 @@ span {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #7386D5;
+    background: #111;
     color: #fff;
     transition: all 0.3s;
 }
@@ -228,7 +228,7 @@ a.article:hover {
 
 #content {
     width: 100%;
-    padding: 20px;
+    padding: 15px;
     min-height: 100vh;
     transition: all 0.3s;
 }
@@ -285,4 +285,11 @@ a.article:hover {
     #sidebarCollapse span {
         display: none;
     }
+}
+
+/* Common */
+
+.info {
+    font-size: 0.9em;
+    color: #AAA
 }
