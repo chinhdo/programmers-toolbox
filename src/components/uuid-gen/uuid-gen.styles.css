@@ -3,13 +3,12 @@
 }
 
 .UuidGen .output {
-  padding: 10px 5px;
+  padding: 20px 5px;
 }
 
 #ClipboardHelper {
   display: none
 }
-
 
 div button:not(:first-of-type) {
   margin-left: 15px
@@ -20,4 +19,9 @@ div button:not(:first-of-type) {
   padding: 15px;
   min-height: 100vh;
   transition: all 0.3s;
+}
+
+header i {
+  font-size: 1.25rem;
+  padding-right: 0.75rem
 }

@@ -8,6 +8,8 @@ body {
   background-color: #111;
 }
 
+h1 {font-size: 2rem; padding: 10px 0px 10px 0px}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
