@@ -1,20 +1,31 @@
 Programmer's Toolbox is a web site hosting various tools for the programmer.
 
-TODO:
-* HTML Encoder/Decoder
-* Base64 Encoder/Decoder
-* URL Encoder/Decoder
-* GUID/UUID generator
-* Short GUID genetator
-* Test data generator
-* Create account to save settings
-* Social login with Google or Facebook
-* Email login
+There are free online tools for most of these things out there already, but many of them are cumbersome to use, has outdated UI, or is server-rendered. This app will be entirely client-side rendered, with a modern UI. The app will support optional account creation so that settings can be saved.
+
+TODO/Feature Roadmap for V1.0:
+* Features
+  * Encode/Decode (HTML, Base64, URL, Hex, )
+  * Hashes (MD5, SHA-1, SHA-2)
+  * UUID generators (GUID/UUID, short UUID)
+  * Test data generator
+  * Lorem Ipsum generator
+  * Formatters (JSON)
+  * Break strings into multiple lines for various languages
+  * Logins
+    * Create account to save settings
+    * Forgot password
+    * Verify email
+    * Social login with Google or Facebook
+    * Email login
+  
+Misc TODOs
+* Google Analytics
 * Logos in manifest.json - do I need them?
 * Use SCSS or SASS
-* Toogle sidebar
+* Toggle sidebar
 * When minimized - still show a thin sidebar
-* Lazy module
+* Lazy modules
+
 
 Notes
 * Expandable sidebar based on [Bootstrap Sidebar](https://bootstrapious.com/p/bootstrap-sidebar)

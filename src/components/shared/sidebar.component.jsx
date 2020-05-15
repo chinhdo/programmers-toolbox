@@ -21,10 +21,6 @@ export class SideBar extends Component {
             <a href="#homeSubmenu">
               <i className="fas fa-home"></i>UUID/GUID
             </a>
-            <ul className="list-unstyled" id="homeSubmenu">
-              <li><a href="#a">UUID/GUID</a></li>
-              <li><a href="#a">Short UUID</a></li>
-            </ul>
           </li>
           <li>
             <a href="#a">

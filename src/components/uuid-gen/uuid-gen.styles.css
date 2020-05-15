@@ -2,29 +2,22 @@
   width: 100%
 }
 
-a, a:hover {
-  /* TODO move to commons */
-  text-decoration: underline;
-}
-
-a:hover {
-  color: white;
-}
-
-.output {
+.UuidGen .output {
   padding: 10px 5px;
 }
-
-.svg-inline--fa {margin-left: 10px}
 
 #ClipboardHelper {
   display: none
 }
 
-.btn {
-  padding: 4px 8px;
-}
 
 div button:not(:first-of-type) {
   margin-left: 15px
+}
+
+#content {
+  width: 100%;
+  padding: 15px;
+  min-height: 100vh;
+  transition: all 0.3s;
 }
