@@ -2,7 +2,7 @@ Programmer's Toolbox is a web site hosting various tools for the programmer.
 
 There are free online tools for most of these things out there already, but many of them are cumbersome to use, has outdated UI, or is server-rendered. This app will be entirely client-side rendered, with a modern UI. The app will support optional account creation so that settings can be saved.
 
-Misc TODOs
+## Misc TODOs
 * Google Analytics
 * Logos in manifest.json - do I need them?
 * Use SCSS or SASS
@@ -10,6 +10,7 @@ Misc TODOs
 * When minimized - still show a thin sidebar
 * Lazy modules
 * SEO
+* Task to auto deploy to PROD using RSYNC
 
 
 Notes
