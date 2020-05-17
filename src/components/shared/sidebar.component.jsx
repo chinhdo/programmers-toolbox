@@ -5,16 +5,36 @@ export class SideBar extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {}
+    this.state = {
+      className: "off"
+    }
+
+    this.toggleMenu = this.toggleMenu.bind(this);
+    global.toggleMenu = this.toggleMenu;
+  }
+
+  getClassName() {
+    return this.state.className;
+  }
+
+  toggleMenu(menuState) {
+    
+    let newState;
+    if (menuState) {
+      newState = menuState;
+    }
+    else {
+      newState = this.state.className === "on" ? "off" : "on";
+    }
+
+    global.menuVisible = newState === "on";
+    this.setState({ className: newState});
   }
 
   render() {
     return (
-      <nav id="sidebar">
-        {/* <div className="sidebar-header">
-          <h3>Programmer's Toolbox by Chinh Do</h3>
-          <strong>BS</strong>
-        </div> */}
+      <nav id="sidebar" className={this.getClassName()}>
+        <div className="closeBtn" onClick={this.toggleMenu}><i className="fas fa-bars"></i></div>
         <ul className="list-unstyled components">
           <li className="active">
             <a href="#homeSubmenu"><i className="fas fa-fingerprint fa-fw"></i>UUID/GUID</a>

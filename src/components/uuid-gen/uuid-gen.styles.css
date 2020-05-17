@@ -25,3 +25,11 @@ header i {
   font-size: 1.25rem;
   padding-right: 0.75rem
 }
+
+.three-bars {
+  display: none
+}
+
+@media (max-width: 768px) {
+  .three-bars {display: inline}
+}

@@ -15,6 +15,7 @@ class UuidGen extends Component {
     this.clear = this.clear.bind(this);
     this.uuid = this.uuid.bind(this);
     this.short = this.short.bind(this);
+    this.toggleMenu = this.toggleMenu.bind(this);
     this.copyClipboard = this.copyClipboard.bind(this);
   }
 
@@ -32,7 +33,6 @@ class UuidGen extends Component {
     el.value = str;
     el.select();
     document.execCommand('copy');
-    console.log("copied " + str)
   }
 
   short() {
@@ -40,6 +40,11 @@ class UuidGen extends Component {
     const translator = short();
     uuids.push(translator.new());
     this.setState({ uuids: uuids });
+  }
+
+  toggleMenu(menuState) {
+    // TODO use subcriber/publisher - don't use global
+    global.toggleMenu(menuState);
   }
 
   uuid() {
@@ -55,9 +60,12 @@ class UuidGen extends Component {
     }
 
     return (
-      <div className="UuidGen">        
+      <div className="UuidGen">
         <div id="content">
-          <header><i className="fas fa-bars"></i>Programmer's Toolbox by CD</header>
+          <header>
+            <div className="three-bars" onClick={() => this.toggleMenu()}><i className="fas fa-bars"></i></div>
+            Programmer's Toolbox by CD
+          </header>
           <h1>Generate UUID/GUID</h1>
           <button className="btn btn-outline-primary" onClick={this.uuid} title="Generate a UUID/GUID">UUID</button>
           <button className="btn btn-outline-primary" onClick={this.short} title="Generate a short UUID">Short</button>

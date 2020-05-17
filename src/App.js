@@ -9,20 +9,31 @@ class App extends Component {
 
     this.state = {
     }
+
+    this.onMouseUp = this.onMouseUp.bind(this);
   }
 
   componentDidMount() {
   }
 
+  onMouseUp(e) {
+    console.log(global.menuVisible);
+    if (global.menuVisible) {
+      let sidebar = document.getElementById('sidebar');
+      if (e.target !== sidebar ) {
+        console.log('You clicked outside!');
+        global.toggleMenu(); // TODO
+      }
+    }
+  }
+
   render() {
     return (
-      <div className="App">
+      <div className="App" onMouseUp={this.onMouseUp}>
         <SideBar />
         <UuidGen />
-        {/* <HtmlEncoder /> */}        
       </div>
     );
-
   }
 }
 

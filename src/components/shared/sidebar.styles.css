@@ -80,15 +80,39 @@
   margin-right: 5px;
 }
 
+.closeBtn {
+  display: none;
+  padding: 10px 30px 0px 15px; 
+  font-size: 1.25rem
+}
+
+@keyframes menuOn {
+  from {
+    opacity: 0;
+  }
+  to {
+
+  }
+}
+
 @media (max-width: 768px) {
   #sidebar {
       display: none;
-      min-width: 80px;
-      max-width: 80px;
-      text-align: center;
-      margin-left: -80px !important;
+      position: absolute;
+      height: 100%;
   }
-  .dropdown-toggle::after {
+
+  #sidebar.on {
+    display: block;
+    animation-name: menuOn;
+    animation-duration: 0.5s;
+  }
+
+  .closeBtn {
+    display: block;
+  }
+
+  /* .dropdown-toggle::after {
       top: auto;
       bottom: 10px;
       right: 50%;
@@ -127,5 +151,5 @@
   }
   #sidebarCollapse span {
       display: none;
-  }
+  } */
 }
