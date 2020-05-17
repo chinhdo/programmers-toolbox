@@ -22,7 +22,9 @@ class App extends Component {
       let sidebar = document.getElementById('sidebar');
       if (e.target !== sidebar ) {
         console.log('You clicked outside!');
-        global.toggleMenu(); // TODO
+        setTimeout(() => {
+          global.toggleMenu("off");
+        }, 250);        
       }
     }
   }
