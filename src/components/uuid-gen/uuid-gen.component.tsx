@@ -3,9 +3,19 @@ import './uuid-gen.styles.css'
 import { v4 as uuidv4 } from 'uuid';
 import short from 'short-uuid';
 import { Footer } from '../shared/footer.component';
+const globalAny:any = global;
 
-class UuidGen extends Component {
-  constructor(props) {
+interface IProps {
+
+}
+
+interface IState {
+  showCopy: boolean;
+  uuids: string[];
+}
+
+class UuidGen extends Component<IProps, IState> {
+  constructor(props: IProps) {
     super(props);
     this.state = {
       showCopy: false,
@@ -28,8 +38,8 @@ class UuidGen extends Component {
     this.setState({ uuids: [] })
   }
 
-  copyClipboard(str) {
-    const el = document.getElementById('ClipboardHelper');
+  copyClipboard(str: string) {
+    const el = document.getElementById('ClipboardHelper') as HTMLInputElement;
     el.value = str;
     el.select();
     document.execCommand('copy');
@@ -42,9 +52,9 @@ class UuidGen extends Component {
     this.setState({ uuids: uuids });
   }
 
-  toggleMenu(menuState) {
+  toggleMenu(className?: string) {
     // TODO use subcriber/publisher - don't use global
-    global.toggleMenu(menuState);
+    globalAny.toggleMenu(className);
   }
 
   uuid() {

@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, MouseEvent } from 'react';
 import './App.css';
 import { SideBar } from './components/shared/sidebar.component';
 import UuidGen from './components/uuid-gen/uuid-gen.component';
+const globalAny:any = global;
 
 class App extends Component {
-  constructor(props) {
+  constructor(props: Readonly<{name: string}>) {
     super(props);
 
     this.state = {
@@ -16,14 +17,13 @@ class App extends Component {
   componentDidMount() {
   }
 
-  onMouseUp(e) {
-    console.log(global.menuVisible);
-    if (global.menuVisible) {
+  onMouseUp(e: MouseEvent) {
+    if (globalAny.menuVisible) {
       let sidebar = document.getElementById('sidebar');
       if (e.target !== sidebar ) {
         console.log('You clicked outside!');
         setTimeout(() => {
-          global.toggleMenu("off");
+          globalAny.toggleMenu("off");
         }, 250);        
       }
     }
