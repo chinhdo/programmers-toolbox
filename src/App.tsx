@@ -4,17 +4,16 @@ import { SideBar } from './components/shared/sidebar.component';
 import UuidGen from './components/uuid-gen/uuid-gen.component';
 const globalAny:any = global;
 
+interface IProps extends Readonly<{name: string}> {}
+
 class App extends Component {
-  constructor(props: Readonly<{name: string}>) {
+  constructor(props: IProps) {
     super(props);
 
     this.state = {
     }
 
     this.onMouseUp = this.onMouseUp.bind(this);
-  }
-
-  componentDidMount() {
   }
 
   onMouseUp(e: MouseEvent) {
