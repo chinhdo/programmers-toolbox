@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import './homepage.styles.scss';
-import { Link } from 'react-router-dom';
 
 interface IProps { }
 
