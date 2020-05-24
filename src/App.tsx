@@ -1,12 +1,15 @@
 import React, { Component, MouseEvent } from 'react';
-import './App.css';
+import { BrowserRouter } from 'react-router-dom';
 import { SideBar } from './components/shared/sidebar.component';
 import UuidGen from './components/uuid-gen/uuid-gen.component';
-const globalAny:any = global;
+import { Footer } from './components/shared/footer.component';
+import './App.css';
 
-interface IProps extends Readonly<{name: string}> {}
+const globalAny: any = global;
 
-class App extends Component {
+interface IProps extends Readonly<{ name: string }> { }
+
+class App extends Component<IProps> {
   constructor(props: IProps) {
     super(props);
 
@@ -19,11 +22,10 @@ class App extends Component {
   onMouseUp(e: MouseEvent) {
     if (globalAny.menuVisible) {
       let sidebar = document.getElementById('sidebar');
-      if (e.target !== sidebar ) {
-        console.log('You clicked outside!');
+      if (e.target !== sidebar) {
         setTimeout(() => {
           globalAny.toggleMenu("off");
-        }, 250);        
+        }, 250);
       }
     }
   }
@@ -32,7 +34,12 @@ class App extends Component {
     return (
       <div className="App" onMouseUp={this.onMouseUp}>
         <SideBar />
-        <UuidGen />
+        <div id="content">
+          <BrowserRouter>
+            <UuidGen />
+          </BrowserRouter>
+          <Footer />
+        </div>
       </div>
     );
   }
