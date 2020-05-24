@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import short from 'short-uuid';
-import './uuid-gen.styles.scss'
+import './uuid-page.styles.scss'
 
 interface IProps {
 

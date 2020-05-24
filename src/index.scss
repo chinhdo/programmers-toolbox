@@ -9,7 +9,7 @@ body {
   background-color: #111;
 }
 
-h1 {font-size: 2rem; padding: 10px 0px 10px 0px}
+h1 {font-size: 2rem; padding: 0px 0px 10px 0px}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
@@ -122,4 +122,15 @@ a:hover {
 .info {
   font-size: 0.9em;
   color: #AAA
+}
+
+textarea {
+  width: 100%;
+  white-space: nowrap;
+  font-size: 0.75rem;
+  font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
+  color: white;
+  background-color:	#111;
+  padding: 10px;
+  border: none;
 }
