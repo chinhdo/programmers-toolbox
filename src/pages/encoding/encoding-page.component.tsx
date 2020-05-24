@@ -22,6 +22,7 @@ class EncodingPage extends Component<IProps, IState> {
 
   // TODO: Save form state (with Redux?)
   // TODO: Remember key choices in browser storage
+  // TODO: tab/shift tab to indent/unindent
 
   decode() {
     // TODO: look at encode type
