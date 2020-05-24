@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './uuid-gen.styles.css'
 import { v4 as uuidv4 } from 'uuid';
 import short from 'short-uuid';
+import './uuid-gen.styles.scss'
 const globalAny: any = global;
 
 interface IProps {
@@ -24,7 +24,6 @@ class UuidGen extends Component<IProps, IState> {
     this.clear = this.clear.bind(this);
     this.uuid = this.uuid.bind(this);
     this.short = this.short.bind(this);
-    this.toggleMenu = this.toggleMenu.bind(this);
     this.copyClipboard = this.copyClipboard.bind(this);
   }
 
@@ -51,11 +50,6 @@ class UuidGen extends Component<IProps, IState> {
     this.setState({ uuids: uuids });
   }
 
-  toggleMenu(className?: string) {
-    // TODO use subcriber/publisher - don't use global
-    globalAny.toggleMenu(className);
-  }
-
   uuid() {
     const uuids = this.state.uuids;
     uuids.push(uuidv4());
@@ -70,10 +64,6 @@ class UuidGen extends Component<IProps, IState> {
 
     return (
       <div className="UuidGen">
-        <header>
-          <div className="three-bars" onClick={() => this.toggleMenu()}><i className="fas fa-bars"></i></div>
-            Programmer's Toolbox by CD
-          </header>
         <h1>Generate UUID/GUID</h1>
         <button className="btn btn-outline-primary" onClick={this.uuid} title="Generate a UUID/GUID">UUID</button>
         <button className="btn btn-outline-primary" onClick={this.short} title="Generate a short UUID">Short</button>
