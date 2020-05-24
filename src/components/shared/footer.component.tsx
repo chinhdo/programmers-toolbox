@@ -20,6 +20,7 @@ export class Footer extends Component<IProps, IState> {
         <b>Feature Roadmap</b>
         <ul>
           <li>Encode/Decode (HTML, Base64, URL, Hex, etc.)</li>
+          <li>Enter key triggers encode/decode action</li>
           <li>Hashes (MD5, SHA-1, SHA-2)</li>
           <li>UUID generators (GUID/UUID, short UUID)</li>
           <li>Test data generator</li>
@@ -29,11 +30,10 @@ export class Footer extends Component<IProps, IState> {
           <li>Tab/shift-tab to indent/unindent in text boxes</li>
           <li>Persist data in browser local storage (asks for permission first)</li>
           <li>HTML page template</li>
+          <li>Light mode</li>
           <li>Logins</li>
           <ul>
             <li>Create account to save settings</li>
-            <li>Forgot password</li>
-            <li>Verify email</li>
             <li>Social login with Google or Facebook</li>
             <li>Email login</li>
           </ul>
