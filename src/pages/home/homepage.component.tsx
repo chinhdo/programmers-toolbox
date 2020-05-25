@@ -24,6 +24,27 @@ class HomePage extends Component<IProps, IState> {
           I am hoping to make this site the best place for frequently used tools like encoding/decoding, hashing things, generating UUIDs, etc.
           This site is entirely client-side so that once the site is loaded, everything will happen on your browser and should be very fast.
         </p>
+        <h2>Feature Roadmap</h2>
+        <ul>
+          <li>Encode/Decode (HTML, Base64, URL, Hex, etc.)</li>
+          <li>Enter key triggers encode/decode action</li>
+          <li>Hashes (MD5, SHA-1, SHA-2)</li>
+          <li>UUID generators (GUID/UUID, short UUID)</li>
+          <li>Test data generator</li>
+          <li>Lorem Ipsum generator</li>
+          <li>Formatters (compact JSON)</li>
+          <li>Break long strings into multiple lines for various languages</li>
+          <li>Tab/shift-tab to indent/unindent in text boxes</li>
+          <li>Persist data in browser local storage (asks for permission first)</li>
+          <li>HTML page template</li>
+          <li>Light mode</li>
+          <li>Logins</li>
+          <ul>
+            <li>Create account to save settings</li>
+            <li>Social login with Google or Facebook</li>
+            <li>Email login</li>
+          </ul>
+        </ul>
       </div>
     );
   }
