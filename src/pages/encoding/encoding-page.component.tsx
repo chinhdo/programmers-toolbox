@@ -4,7 +4,7 @@ import './encoding-page.styles.scss';
 
 interface IProps { }
 
-interface IState { 
+interface IState {
   input: string;
   output: string;
 }
@@ -12,7 +12,7 @@ interface IState {
 class EncodingPage extends Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
-    this.state = {input: '', output: ''};
+    this.state = { input: '', output: '' };
 
     this.inputChanged = this.inputChanged.bind(this);
     this.outputChanged = this.outputChanged.bind(this);
@@ -28,74 +28,106 @@ class EncodingPage extends Component<IProps, IState> {
   decode() {
     // TODO: look at encode type
     const decoded = decodeURIComponent(this.state.output);
-    this.setState({input: decoded});
+    this.setState({ input: decoded });
   }
 
   encode() {
     // TODO: look at encode type
     const encoded = encodeURIComponent(this.state.input);
-    this.setState({output: encoded});
+    this.setState({ output: encoded });
   }
 
   keydown(e: KeyboardEvent<HTMLTextAreaElement>) {
+    if (e.key === 'z') {
+      e.preventDefault();
+    }
+
     // Support for tab/shift tab indentation
     if (e.key === 'Tab') {
-      e.preventDefault();      
-
+      e.preventDefault();
       const ta = e.target as HTMLTextAreaElement;
-      const text = ta.value;
-      const selectionStart = ta.selectionStart;
-      
-      if (e.shiftKey) {
-        let lineStart = ta.selectionStart > 0 ? ta.selectionStart - 1: 0;
-        while (lineStart>0) {
-          const char = text[lineStart];
-          if (char === '\n') {
-            lineStart ++;
-            break;
+      let text = ta.value;
+      const s1 = ta.selectionStart;
+      const s2 = ta.selectionEnd;
+
+      if (ta.selectionStart === ta.selectionEnd) {
+        if (e.shiftKey) {
+          let p1 = s1 === 0 ? 0 : Math.max(text.lastIndexOf('\n', s1 - 1) + 1, 0); // Start of current line
+          let p2 = text.indexOf('\n', p1 + 1); // End of current line
+          p2 = p2 === -1 ? text.length : p2;
+
+          const line = text.substring(p1, p2);
+
+          if (line.startsWith('  ')) {
+            ta.value = text.substring(0, p1) + text.substring(p1 + 2, text.length);;
+            ta.selectionStart = s1 > 1 ? s1 - 2 : 0;
+            ta.selectionEnd = ta.selectionStart;
           }
-          lineStart--;
         }
-
-        let lineEnd = ta.selectionStart;
-        while (lineEnd<text.length) {
-          const char = text[lineEnd];
-          if (char === '\n') {
-            lineEnd--;
-            break;
+        else {
+          ta.focus();
+          document.execCommand('insertText', false, '  ');
+        }
+      } else { // text selected
+        let p1 = s1 === 0 ? 0 : Math.max(text.lastIndexOf('\n', s1 - 1) + 1, 0); // Start of current line
+        let p2 = text.indexOf('\n', s2);
+        p2 = p2 === -1 ? text.length : p2;
+        if (e.shiftKey) {
+          let idx = p2 - 1;
+          let charsRemoved = 0;
+          while (idx >= p1) {
+            if (text[idx] === '\n') {
+              if (text.indexOf('  ', idx) === idx + 1) {
+                text = [text.slice(0, idx + 1), text.slice(idx + 3)].join('');
+                charsRemoved += 2;
+              }
+            } 
+            idx --;
           }
-          lineEnd ++;
+          if (text.indexOf('  ', idx) === idx + 1) {
+            text = [text.slice(0, idx + 1), text.slice(idx + 3)].join('');
+            charsRemoved += 2;
+          }
+
+          ta.value = text;
+          ta.selectionStart = s1;
+          ta.selectionEnd = s2 - charsRemoved;          
+        } else {
+          let idx = p2 - 1;
+          let charsAdded = 0;
+          while (idx >= p1) {
+            if (text[idx] === '\n') {
+              text = [text.slice(0, idx + 1), '  ', text.slice(idx + 1)].join('');
+              charsAdded += 2;
+            } 
+            idx --;
+          }
+          text = [text.slice(0, idx + 1), '  ', text.slice(idx + 1)].join('');
+          charsAdded += 2;
+
+          ta.value = text;
+          ta.selectionStart = s1;
+          ta.selectionEnd = s2 + charsAdded;
         }
+      }
+    }
+  }
 
-        const line = text.substring(lineStart, lineEnd);
-        // console.log(`sa=${ta.selectionStart} line=[${line}].`);
-        console.log(`lineStart=${lineStart} lineEnd=${lineEnd}`);
-
-        if (line.startsWith('  ')) {
-          console.log(`1=[${text.substring(0, lineStart)}]`);
-          console.log(`2=[${text.substring(lineStart + 2)}]`);
-
-          const newText = text.substring(0, lineStart) + text.substring(lineStart + 2, text.length);
-          
-          ta.value = newText;
-  
-          ta.selectionStart = selectionStart>1 ? selectionStart - 2 : 0;
-          ta.selectionEnd = ta.selectionStart;  
-        }
-      } 
-      else {
-        ta.focus();
-        document.execCommand('insertText', false, '  ');
-      }     
-    }    
+  // TODO DELETE debug code
+  keyup(e: KeyboardEvent<HTMLTextAreaElement>) {
+    if (e.key === 'z') {
+      e.preventDefault();
+      const ta = e.target as HTMLTextAreaElement;
+      console.log(ta.selectionStart + ' ' + ta.value[ta.selectionStart]);
+    }
   }
 
   inputChanged(e: ChangeEvent<HTMLTextAreaElement>) {
-    this.setState({input: e.target.value});    
+    this.setState({ input: e.target.value });
   }
 
   outputChanged(e: ChangeEvent<HTMLTextAreaElement>) {
-    this.setState({output: e.target.value});
+    this.setState({ output: e.target.value });
   }
 
   render() {
@@ -111,11 +143,13 @@ class EncodingPage extends Component<IProps, IState> {
         {/* INPUT */}
         <div className="input">
           <textarea spellCheck="false" value={this.state.input}
-          onChange={(ev: ChangeEvent<HTMLTextAreaElement>): void => this.inputChanged(ev)} 
-          onKeyDown={(ev) => this.keydown(ev)}></textarea>
+            onChange={(ev: ChangeEvent<HTMLTextAreaElement>): void => this.inputChanged(ev)}
+            onKeyDown={(ev) => this.keydown(ev)}
+            onKeyUp={(ev) => this.keyup(ev)}
+          ></textarea>
         </div>
         <div className="buttons">
-          <button className="btn btn-outline-primary" title="Encode" 
+          <button className="btn btn-outline-primary" title="Encode"
             onClick={this.encode}>Encode <i className="fas fa-arrow-down"></i></button>
           <button className="btn btn-outline-secondary" title="Encode"
             onClick={this.decode}>Decode <i className="fas fa-arrow-up"></i></button>
@@ -123,12 +157,12 @@ class EncodingPage extends Component<IProps, IState> {
         {/* OUTPUT */}
         <div className="output">
           <textarea spellCheck="false" value={this.state.output}
-          onChange={(ev: ChangeEvent<HTMLTextAreaElement>) => this.outputChanged(ev)}></textarea>
+            onChange={(ev: ChangeEvent<HTMLTextAreaElement>) => this.outputChanged(ev)}></textarea>
         </div>
         <div className="about">
           <h3>About URL Encoding</h3>
           <p>URL encoding, also known as <a href="https://tools.ietf.org/html/rfc3986#section-2.1">Percent-encoding"</a>, converts characters into
-          a format that can be transmitted safely over the internet. The two most frequently used applications are encoding charaters in a URL, and data for 
+          a format that can be transmitted safely over the internet. The two most frequently used applications are encoding charaters in a URL, and data for
           application/x-www-form-urlencoded media type, often used for submitting form data on web pages.
           </p>
           <p>Per <a href="https://tools.ietf.org/html/rfc3986">RFC 3986</a>, the list of reserved characters for Percent-encoding are: ! * ' ( ) ; : @ & = + $ , / ? # [ ].</p>
