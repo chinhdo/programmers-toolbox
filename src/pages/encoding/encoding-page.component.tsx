@@ -1,10 +1,18 @@
 import React, { Component, ChangeEvent, KeyboardEvent } from 'react';
+import HTMLDecoderEncoder from 'html-encoder-decoder';
+
+// TODO: Add info about HTML and Base64 encoding to info section.
 
 import './encoding-page.styles.scss';
 
 interface IProps { }
 
+enum EncodeType {
+  url = "url", html = "html", base64 = "base64"
+}
+
 interface IState {
+  encodeType: EncodeType;
   input: string;
   output: string;
 }
@@ -12,13 +20,18 @@ interface IState {
 class EncodingPage extends Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
-    this.state = { input: '', output: '' };
+    this.state = {
+      input: '',
+      output: '',
+      encodeType: EncodeType.url
+    };
 
     this.inputChanged = this.inputChanged.bind(this);
     this.outputChanged = this.outputChanged.bind(this);
     this.encode = this.encode.bind(this);
     this.decode = this.decode.bind(this);
     this.keydown = this.keydown.bind(this);
+    this.radioChanged = this.radioChanged.bind(this);
   }
 
   // TODO: Save form state (with Redux?)
@@ -26,14 +39,43 @@ class EncodingPage extends Component<IProps, IState> {
   // TODO: tab/shift tab to indent/unindent
 
   decode() {
-    // TODO: look at encode type
-    const decoded = decodeURIComponent(this.state.output);
+    let decoded: string;
+    switch (this.state.encodeType) {
+      case EncodeType.url:
+        decoded = decodeURIComponent(this.state.output);
+        break;
+      case EncodeType.html:        
+        decoded = HTMLDecoderEncoder.decode(this.state.output);
+        break;
+      case EncodeType.base64:
+        decoded = atob(this.state.output);
+        break;
+      default:
+        decoded = 'NA';
+        break;
+    }
+    
     this.setState({ input: decoded });
   }
 
   encode() {
-    // TODO: look at encode type
-    const encoded = encodeURIComponent(this.state.input);
+    console.log('Type: ', this.state.encodeType);
+    let encoded: string;
+    switch (this.state.encodeType) {
+      case EncodeType.url:
+        encoded = encodeURIComponent(this.state.input);
+        break;
+      case EncodeType.html:        
+        encoded = HTMLDecoderEncoder.encode(this.state.input);
+        break;
+      case EncodeType.base64:
+        encoded = btoa(this.state.input);
+        break;
+      default:
+        encoded = 'NA';
+        break;
+    }
+
     this.setState({ output: encoded });
   }
 
@@ -81,8 +123,8 @@ class EncodingPage extends Component<IProps, IState> {
                 text = [text.slice(0, idx + 1), text.slice(idx + 3)].join('');
                 charsRemoved += 2;
               }
-            } 
-            idx --;
+            }
+            idx--;
           }
           if (text.indexOf('  ', idx) === idx + 1) {
             text = [text.slice(0, idx + 1), text.slice(idx + 3)].join('');
@@ -91,7 +133,7 @@ class EncodingPage extends Component<IProps, IState> {
 
           ta.value = text;
           ta.selectionStart = s1;
-          ta.selectionEnd = s2 - charsRemoved;          
+          ta.selectionEnd = s2 - charsRemoved;
         } else {
           let idx = p2 - 1;
           let charsAdded = 0;
@@ -99,8 +141,8 @@ class EncodingPage extends Component<IProps, IState> {
             if (text[idx] === '\n') {
               text = [text.slice(0, idx + 1), '  ', text.slice(idx + 1)].join('');
               charsAdded += 2;
-            } 
-            idx --;
+            }
+            idx--;
           }
           text = [text.slice(0, idx + 1), '  ', text.slice(idx + 1)].join('');
           charsAdded += 2;
@@ -113,15 +155,6 @@ class EncodingPage extends Component<IProps, IState> {
     }
   }
 
-  // TODO DELETE debug code
-  keyup(e: KeyboardEvent<HTMLTextAreaElement>) {
-    if (e.key === 'z') {
-      e.preventDefault();
-      const ta = e.target as HTMLTextAreaElement;
-      console.log(ta.selectionStart + ' ' + ta.value[ta.selectionStart]);
-    }
-  }
-
   inputChanged(e: ChangeEvent<HTMLTextAreaElement>) {
     this.setState({ input: e.target.value });
   }
@@ -130,22 +163,47 @@ class EncodingPage extends Component<IProps, IState> {
     this.setState({ output: e.target.value });
   }
 
+  radioChanged(e: ChangeEvent<HTMLInputElement>) {
+    const value: string = (e.target as HTMLInputElement).value;
+    this.setState({ encodeType: EncodeType[value as keyof typeof EncodeType] })
+  }
+
+  private encodeHtml(str: string) {
+      return str; // TODO
+  }
+
+  private decodeHtml(str: string) {
+    return str; // TODO
+  }
+
   render() {
     return (
       <div className="EncodingPage">
         <h1>Encoding/Decoding</h1>
-        <div className="btn-group-toggle" data-toggle="buttons">
-          <label className="btn btn-secondary active"><input type="checkbox"></input>URL</label>
-          <label className="btn btn-secondary"><input type="checkbox"></input>HTML</label>
-          <label className="btn btn-secondary"><input type="checkbox"></input>Base64</label>
+        <div>
+          <div>
+
+            <label htmlFor="urlOption">
+              <input type="radio" name="encodeType" id="urlOption" value="url"
+                onChange={this.radioChanged} checked={this.state.encodeType === EncodeType.url} />URL
+            </label>
+            <label htmlFor="htmlOption">
+              <input type="radio" name="encodeType" id="htmlOption" value="html"
+                onChange={this.radioChanged} checked={this.state.encodeType === EncodeType.html} />HTML
+            </label>
+            <label htmlFor="base64Option">
+              <input type="radio" name="encodeType" id="base64Option" value="base64"
+                onChange={this.radioChanged} checked={this.state.encodeType === EncodeType.base64} />Base64
+              </label>
+          </div>
         </div>
+
 
         {/* INPUT */}
         <div className="input">
           <textarea spellCheck="false" value={this.state.input}
             onChange={(ev: ChangeEvent<HTMLTextAreaElement>): void => this.inputChanged(ev)}
             onKeyDown={(ev) => this.keydown(ev)}
-            onKeyUp={(ev) => this.keyup(ev)}
           ></textarea>
         </div>
         <div className="buttons">

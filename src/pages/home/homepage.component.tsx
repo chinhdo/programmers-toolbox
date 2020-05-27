@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import './homepage.styles.scss';
+import { Link } from 'react-router-dom';
 
 interface IProps { }
 
@@ -24,9 +25,14 @@ class HomePage extends Component<IProps, IState> {
           I am hoping to make this site the best place for frequently used tools like encoding/decoding, hashing things, generating UUIDs, etc.
           This site is entirely client-side so that once the site is loaded, everything will happen on your browser and should be very fast.
         </p>
+        <ul>
+          <li>Generate a <Link to="/uuid">UUID or GUID</Link></li>
+          <li><Link to="/encode">URL Encode/Decode</Link></li>
+          <li><Link to="/encode">HTML Encode/Decode</Link></li>
+          <li><Link to="/encode">Base64 Encode/Decode</Link></li>
+        </ul>
         <h2>Feature Roadmap</h2>
         <ul>
-          <li>Encode/Decode (HTML, Base64, URL, Hex, etc.)</li>
           <li>Enter key triggers encode/decode action</li>
           <li>Hashes (MD5, SHA-1, SHA-2)</li>
           <li>UUID generators (GUID/UUID, short UUID)</li>
