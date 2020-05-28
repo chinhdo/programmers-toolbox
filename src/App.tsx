@@ -3,12 +3,18 @@ import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
 import UuidGen from './pages/uuid-gen/uuid-page.component';
 import { Footer } from './components/shared/footer.component';
 import HomePage from './pages/home/homepage.component';
-import './App.scss';
 import EncodingPage from './pages/encoding/encoding-page.component';
+import LoginAndSignUpPage from './pages/login-and-sign-up/login-and-sign-up.component';
+import { createUserProfileDocument, auth } from './utils/firebase.utils';
+
+import './App.scss';
+
+// TODO: https://docs.microsoft.com/en-us/azure/static-web-apps/routes?WT.mc_id=build2020_swa-docs-jopapa
 
 interface IProps extends Readonly<{ name: string }> { }
 
 interface IState {
+  currentUser: any; // TODO
   responsiveMenuOn: boolean;
 }
 
@@ -17,11 +23,38 @@ class App extends Component<IProps, IState> {
     super(props);
 
     this.state = {
+      currentUser: null,
       responsiveMenuOn: false
     }
 
     this.onMouseUp = this.onMouseUp.bind(this);
     this.toggleMenu = this.toggleMenu.bind(this);
+  }
+
+  unsubscribeFromAuth: any; // TODO
+
+  componentDidMount() {
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth, null);
+
+        userRef?.onSnapshot(snapShot => {
+          this.setState({
+            currentUser: {
+              id: snapShot.id,
+              ...snapShot.data()
+            }
+          });
+        });
+      }
+
+      console.log('User', userAuth);
+      this.setState({ currentUser: userAuth });
+    });
+  }
+
+  componentWillUnmount() {
+    this.unsubscribeFromAuth();
   }
 
   getClassName() {
@@ -56,6 +89,7 @@ class App extends Component<IProps, IState> {
               <li><Link to="/signup"><i className="fas fa-user-plus fa-fw"></i>Sign up</Link></li>
               <li><Link to="/login"><i className="fas fa-sign-in-alt fa-fw"></i>Login</Link></li>
               <li><Link to="/faq"><i className="fas fa-question fa-fw"></i>FAQ</Link></li>
+              {/* <li>Current User: {this.state.currentUser?.P.email}</li> */}
             </ul>
           </nav>
 
@@ -69,6 +103,7 @@ class App extends Component<IProps, IState> {
             <Switch>
               <Route path="/uuid"><UuidGen /></Route>
               <Route path="/encode"><EncodingPage /></Route>
+              <Route path="/login"><LoginAndSignUpPage /></Route>
               <Route exact path="/"><HomePage /></Route>
             </Switch>
             <Footer />

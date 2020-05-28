@@ -2,6 +2,7 @@ import React, { Component, ChangeEvent, KeyboardEvent } from 'react';
 import HTMLDecoderEncoder from 'html-encoder-decoder';
 
 // TODO: Add info about HTML and Base64 encoding to info section.
+// TODO: Bug - Encode undo indent
 
 import './encoding-page.styles.scss';
 

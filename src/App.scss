@@ -1,6 +1,5 @@
 .App {
   color: white;
-  background-color: black;
   display: flex;
   align-items: stretch;
 }
@@ -12,7 +11,7 @@
 #sidebar {
   min-width: 200px;
   max-width: 200px;
-  background: #111;
+  background:#1c2844;
   color: #fff;
   transition: all 0.3s;
   font-size: 0.7rem;
