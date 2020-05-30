@@ -8,6 +8,7 @@ import LoginAndSignUpPage from './pages/login-and-sign-up/login-and-sign-up.comp
 import { createUserProfileDocument, auth } from './utils/firebase.utils';
 
 import './App.scss';
+import TestPage from './pages/test/test-page.component';
 
 // TODO: https://docs.microsoft.com/en-us/azure/static-web-apps/routes?WT.mc_id=build2020_swa-docs-jopapa
 
@@ -48,7 +49,7 @@ class App extends Component<IProps, IState> {
         });
       }
 
-      console.log('User', userAuth);
+      console.log('User', userAuth); // TODO remove
       this.setState({ currentUser: userAuth });
     });
   }
@@ -59,6 +60,11 @@ class App extends Component<IProps, IState> {
 
   getClassName() {
     return this.state.responsiveMenuOn ? 'on' : 'off';
+  }
+
+  logOut() {
+    console.log('Logging out.');
+    auth.signOut();
   }
 
   onMouseUp(e: MouseEvent) {
@@ -86,10 +92,19 @@ class App extends Component<IProps, IState> {
               <li><Link to="/lorem"><i className="fas fa-file-alt fa-fw"></i>Generate Lorem Ipsum</Link></li>
               <li><Link to="/format"><i className="fas fa-pencil-alt fa-fw"></i>Format</Link></li>
               <li><Link to="/testdata"><i className="fas fa-table fa-fw"></i>Generate Test Data</Link></li>
+              <li><Link to="/test"><i className="fas fa-table fa-fw"></i>Test</Link></li>
               <li><Link to="/signup"><i className="fas fa-user-plus fa-fw"></i>Sign up</Link></li>
-              <li><Link to="/login"><i className="fas fa-sign-in-alt fa-fw"></i>Login</Link></li>
+              
+              {this.state.currentUser ? 
+                <div>
+                  <li><Link to="" onClick={() => this.logOut()}><i className="fas fa-sign-out-alt fa-fw"></i>Logout</Link></li>
+                  <li><Link to="/profile"><i className="fas fa-user-circle fa-fw"></i>{this.state.currentUser.displayName}</Link></li>
+                </div>
+                : 
+                <li><Link to="/login"><i className="fas fa-sign-in-alt fa-fw"></i>Login</Link></li>
+              }
               <li><Link to="/faq"><i className="fas fa-question fa-fw"></i>FAQ</Link></li>
-              {/* <li>Current User: {this.state.currentUser?.P.email}</li> */}
+            
             </ul>
           </nav>
 
@@ -104,6 +119,7 @@ class App extends Component<IProps, IState> {
               <Route path="/uuid"><UuidGen /></Route>
               <Route path="/encode"><EncodingPage /></Route>
               <Route path="/login"><LoginAndSignUpPage /></Route>
+              <Route path="/test"><TestPage /></Route>
               <Route exact path="/"><HomePage /></Route>
             </Switch>
             <Footer />

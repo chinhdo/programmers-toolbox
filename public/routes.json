@@ -1,0 +1,16 @@
+{
+  "routes": [
+    {
+      "route": "/uuid",
+      "serve": "/"
+    },
+    {
+      "route": "/encode",
+      "serve": "/"
+    },
+    {
+      "route": "/login",
+      "serve": "/"
+    }
+  ]
+}
