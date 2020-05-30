@@ -118,7 +118,6 @@ class App extends Component<IProps, IState> {
               <Route path="/uuid"><UuidGen /></Route>
               <Route path="/encode"><EncodingPage /></Route>
               <Route path="/login"><LoginAndSignUpPage /></Route>
-              <Route path="/test"><TestPage /></Route>
               <Route exact path="/"><HomePage /></Route>
             </Switch>
             <Footer />
