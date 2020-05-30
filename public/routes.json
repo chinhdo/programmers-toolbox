@@ -2,15 +2,18 @@
   "routes": [
     {
       "route": "/uuid",
-      "serve": "/"
+      "serve": "/index.html",
+      "status": 200
     },
     {
       "route": "/encode",
-      "serve": "/"
+      "serve": "/index.html",
+      "status": 200
     },
     {
       "route": "/login",
-      "serve": "/"
+      "serve": "/index.html",
+      "status": 200
     }
   ]
 }
