@@ -8,7 +8,6 @@ import LoginAndSignUpPage from './pages/login-and-sign-up/login-and-sign-up.comp
 import { createUserProfileDocument, auth } from './utils/firebase.utils';
 
 import './App.scss';
-import TestPage from './pages/test/test-page.component';
 
 // TODO: https://docs.microsoft.com/en-us/azure/static-web-apps/routes?WT.mc_id=build2020_swa-docs-jopapa
 
