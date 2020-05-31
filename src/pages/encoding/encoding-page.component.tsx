@@ -1,5 +1,6 @@
 import React, { Component, ChangeEvent, KeyboardEvent } from 'react';
 import HTMLDecoderEncoder from 'html-encoder-decoder';
+import * as ls from 'local-storage';
 
 // TODO: Add info about HTML and Base64 encoding to info section.
 // TODO: Bug - Encode undo indent
@@ -21,11 +22,12 @@ interface IState {
 class EncodingPage extends Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
-    this.state = {
-      input: '',
-      output: '',
-      encodeType: EncodeType.url
-    };
+
+    const prevState = ls.get('encode');
+    if (prevState) {
+      this.state = prevState as IState;
+    }
+
 
     this.inputChanged = this.inputChanged.bind(this);
     this.outputChanged = this.outputChanged.bind(this);
@@ -33,6 +35,7 @@ class EncodingPage extends Component<IProps, IState> {
     this.decode = this.decode.bind(this);
     this.keydown = this.keydown.bind(this);
     this.radioChanged = this.radioChanged.bind(this);
+    this.saveStateToLocalStorage = this.saveStateToLocalStorage.bind(this);
   }
 
   // TODO: Save form state (with Redux?)
@@ -45,7 +48,7 @@ class EncodingPage extends Component<IProps, IState> {
       case EncodeType.url:
         decoded = decodeURIComponent(this.state.output);
         break;
-      case EncodeType.html:        
+      case EncodeType.html:
         decoded = HTMLDecoderEncoder.decode(this.state.output);
         break;
       case EncodeType.base64:
@@ -55,18 +58,17 @@ class EncodingPage extends Component<IProps, IState> {
         decoded = 'NA';
         break;
     }
-    
+
     this.setState({ input: decoded });
   }
 
   encode() {
-    console.log('Type: ', this.state.encodeType);
     let encoded: string;
     switch (this.state.encodeType) {
       case EncodeType.url:
         encoded = encodeURIComponent(this.state.input);
         break;
-      case EncodeType.html:        
+      case EncodeType.html:
         encoded = HTMLDecoderEncoder.encode(this.state.input);
         break;
       case EncodeType.base64:
@@ -80,6 +82,7 @@ class EncodingPage extends Component<IProps, IState> {
     this.setState({ output: encoded });
   }
 
+  // TODO: extract this code into a reusable textarea component
   keydown(e: KeyboardEvent<HTMLTextAreaElement>) {
     if (e.key === 'z') {
       e.preventDefault();
@@ -169,15 +172,20 @@ class EncodingPage extends Component<IProps, IState> {
     this.setState({ encodeType: EncodeType[value as keyof typeof EncodeType] })
   }
 
-  private encodeHtml(str: string) {
-      return str; // TODO
-  }
+  timer!: NodeJS.Timeout;
 
-  private decodeHtml(str: string) {
-    return str; // TODO
+  saveStateToLocalStorage() {
+    if (this.timer) { clearTimeout(this.timer); }
+
+    this.timer = setTimeout(() => {
+      console.log('Saved to LS.');
+      ls.set('encode', this.state);
+    }, 1000);
   }
 
   render() {
+    this.saveStateToLocalStorage();
+
     return (
       <div className="EncodingPage">
         <h1>Encoding/Decoding</h1>
