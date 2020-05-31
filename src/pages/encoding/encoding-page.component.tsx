@@ -23,6 +23,13 @@ class EncodingPage extends Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
 
+    this.state = {
+      input: '',
+      output: '',
+      encodeType: EncodeType.url
+    };  
+
+
     const prevState = ls.get('encode');
     if (prevState) {
       this.state = prevState as IState;
