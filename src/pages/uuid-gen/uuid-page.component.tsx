@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import short from 'short-uuid';
 import './uuid-page.styles.scss'
+import BaseComponent from '../../components/shared/base.component';
 
 interface IProps {
 
@@ -12,12 +13,14 @@ interface IState {
   uuids: string[];
 }
 
-class UuidGen extends Component<IProps, IState> {
+class UuidGen extends BaseComponent<IProps, IState> {
   constructor(props: IProps) {
-    super(props);
-    this.state = {
-      showCopy: false,
-      uuids: []
+    super("UuidGen", props);
+    if (!this.state) {
+      this.state = {
+        showCopy: false,
+        uuids: []
+      }
     }
 
     this.clear = this.clear.bind(this);
@@ -56,6 +59,8 @@ class UuidGen extends Component<IProps, IState> {
   }
 
   render() {
+    this.saveStateToLocalStorage();
+
     const uuids = [];
     for (let i = 0; i < this.state.uuids.length; i++) {
       uuids.push(<li key={i.toString()}>{this.state.uuids[i]} <i className="fas fa-copy"></i></li>);

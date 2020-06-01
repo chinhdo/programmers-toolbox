@@ -1,11 +1,12 @@
-import React, { Component, ChangeEvent, KeyboardEvent } from 'react';
+import React, { ChangeEvent, KeyboardEvent } from 'react';
+import BaseComponent from '../../components/shared/base.component';
 import HTMLDecoderEncoder from 'html-encoder-decoder';
-import * as ls from 'local-storage';
 
 // TODO: Add info about HTML and Base64 encoding to info section.
 // TODO: Bug - Encode undo indent
 
 import './encoding-page.styles.scss';
+
 
 interface IProps { }
 
@@ -19,22 +20,17 @@ interface IState {
   output: string;
 }
 
-class EncodingPage extends Component<IProps, IState> {
+class EncodingPage extends BaseComponent<IProps, IState> {
   constructor(props: IProps) {
-    super(props);
+    super('EncodingPage', props);
 
-    this.state = {
-      input: '',
-      output: '',
-      encodeType: EncodeType.url
-    };  
-
-
-    const prevState = ls.get('encode');
-    if (prevState) {
-      this.state = prevState as IState;
+    if (!this.state) {
+      this.state = {
+        input: '',
+        output: '',
+        encodeType: EncodeType.url
+      };
     }
-
 
     this.inputChanged = this.inputChanged.bind(this);
     this.outputChanged = this.outputChanged.bind(this);
@@ -46,8 +42,6 @@ class EncodingPage extends Component<IProps, IState> {
   }
 
   // TODO: Save form state (with Redux?)
-  // TODO: Remember key choices in browser storage
-  // TODO: tab/shift tab to indent/unindent
 
   decode() {
     let decoded: string;
@@ -179,17 +173,6 @@ class EncodingPage extends Component<IProps, IState> {
     this.setState({ encodeType: EncodeType[value as keyof typeof EncodeType] })
   }
 
-  timer!: NodeJS.Timeout;
-
-  saveStateToLocalStorage() {
-    if (this.timer) { clearTimeout(this.timer); }
-
-    this.timer = setTimeout(() => {
-      console.log('Saved to LS.');
-      ls.set('encode', this.state);
-    }, 1000);
-  }
-
   render() {
     this.saveStateToLocalStorage();
 
@@ -242,6 +225,14 @@ class EncodingPage extends Component<IProps, IState> {
           <p>Per <a href="https://tools.ietf.org/html/rfc3986">RFC 3986</a>, the list of reserved characters for Percent-encoding are: ! * ' ( ) ; : @ & = + $ , / ? # [ ].</p>
           <p>The reserved character is encoded by concatenating the % sign with the corresponding byte value of the character in hex.</p>
           <p>In JavaScript code the built-in functions encodeURIComponent and decodeURIComponent are used to perform URL encoding/decoding. In fact that's basically the code behind the URL encoding/decoding feature of this page.</p>
+          <h3>About HTML Entity Encoding</h3>
+          <p>HTML Entity Encoding encodes reserved HTML characters so that the data can be safely embedded in HTML. A character Entity
+          looks like this: [&entity_name;] OR [&#entity_number;]. For example, to include the &lt; sign in HTML we must write
+            &amp;lt; or &amp;#60;</p>
+          <h3>About Base64 Encoding</h3>
+          <p>Base64 encoding represents binary data in ASCII string format by translating it into a radix-64 reprensentation.
+          Base64 is designed to cary data safely in channels that only reliably support text content.
+            </p>
         </div>
       </div>
     );
