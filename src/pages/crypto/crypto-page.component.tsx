@@ -17,7 +17,7 @@ interface IState {
 
 class CryptoPage extends BaseComponent<IProps, IState> {
   constructor(props: IProps) {
-    super('EncodingPage', props);
+    super('CryptoPage', props);
 
     if (!this.state) {
       this.state = {
