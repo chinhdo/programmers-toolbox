@@ -8,8 +8,9 @@ import LoginAndSignUpPage from './pages/login-and-sign-up/login-and-sign-up.comp
 import { createUserProfileDocument, auth } from './utils/firebase.utils';
 
 import './App.scss';
+import CryptoPage from './pages/crypto/crypto-page.component';
 
-// TODO: https://docs.microsoft.com/en-us/azure/static-web-apps/routes?WT.mc_id=build2020_swa-docs-jopapa
+// TODO #2 Tab/shift-tab indentation changes do not persist to local storage correctly
 
 interface IProps extends Readonly<{ name: string }> { }
 
@@ -91,8 +92,7 @@ class App extends Component<IProps, IState> {
               <li><Link to="/lorem"><i className="fas fa-file-alt fa-fw"></i>Generate Lorem Ipsum</Link></li>
               <li><Link to="/format"><i className="fas fa-pencil-alt fa-fw"></i>Format</Link></li>
               <li><Link to="/testdata"><i className="fas fa-table fa-fw"></i>Generate Test Data</Link></li>
-              <li><Link to="/test"><i className="fas fa-table fa-fw"></i>Test</Link></li>
-              <li><Link to="/signup"><i className="fas fa-user-plus fa-fw"></i>Sign up</Link></li>
+              {/* <li><Link to="/test"><i className="fas fa-table fa-fw"></i>Test</Link></li> */}
               
               {this.state.currentUser ? 
                 <div>
@@ -100,7 +100,10 @@ class App extends Component<IProps, IState> {
                   <li><Link to="/profile"><i className="fas fa-user-circle fa-fw"></i>{this.state.currentUser.displayName}</Link></li>
                 </div>
                 : 
-                <li><Link to="/login"><i className="fas fa-sign-in-alt fa-fw"></i>Login</Link></li>
+                <div>
+                  <li><Link to="/signup"><i className="fas fa-user-plus fa-fw"></i>Sign up</Link></li>
+                  <li><Link to="/login"><i className="fas fa-sign-in-alt fa-fw"></i>Login</Link></li>
+                </div>
               }
               <li><Link to="/faq"><i className="fas fa-question fa-fw"></i>FAQ</Link></li>
             
@@ -117,6 +120,7 @@ class App extends Component<IProps, IState> {
             <Switch>
               <Route path="/uuid"><UuidGen /></Route>
               <Route path="/encode"><EncodingPage /></Route>
+              <Route path="/hash"><CryptoPage /></Route>
               <Route path="/login"><LoginAndSignUpPage /></Route>
               <Route exact path="/"><HomePage /></Route>
             </Switch>

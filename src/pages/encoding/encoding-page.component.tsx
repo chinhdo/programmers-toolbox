@@ -7,7 +7,6 @@ import HTMLDecoderEncoder from 'html-encoder-decoder';
 
 import './encoding-page.styles.scss';
 
-
 interface IProps { }
 
 enum EncodeType {
@@ -161,11 +160,11 @@ class EncodingPage extends BaseComponent<IProps, IState> {
   }
 
   inputChanged(e: ChangeEvent<HTMLTextAreaElement>) {
-    this.setState({ input: e.target.value });
+    this.setState({ input: e.target.value }, this.encode);
   }
 
   outputChanged(e: ChangeEvent<HTMLTextAreaElement>) {
-    this.setState({ output: e.target.value });
+    this.setState({ output: e.target.value }, this.decode);
   }
 
   radioChanged(e: ChangeEvent<HTMLInputElement>) {
@@ -178,23 +177,20 @@ class EncodingPage extends BaseComponent<IProps, IState> {
 
     return (
       <div className="EncodingPage">
-        <h1>Encoding/Decoding</h1>
+        <h1>Encode</h1>
         <div>
-          <div>
-
-            <label htmlFor="urlOption">
-              <input type="radio" name="encodeType" id="urlOption" value="url"
-                onChange={this.radioChanged} checked={this.state.encodeType === EncodeType.url} />URL
+          <label htmlFor="urlOption">
+            <input type="radio" name="encodeType" id="urlOption" value="url"
+              onChange={this.radioChanged} checked={this.state.encodeType === EncodeType.url} />URL
             </label>
-            <label htmlFor="htmlOption">
-              <input type="radio" name="encodeType" id="htmlOption" value="html"
-                onChange={this.radioChanged} checked={this.state.encodeType === EncodeType.html} />HTML
+          <label htmlFor="htmlOption">
+            <input type="radio" name="encodeType" id="htmlOption" value="html"
+              onChange={this.radioChanged} checked={this.state.encodeType === EncodeType.html} />HTML
             </label>
-            <label htmlFor="base64Option">
-              <input type="radio" name="encodeType" id="base64Option" value="base64"
-                onChange={this.radioChanged} checked={this.state.encodeType === EncodeType.base64} />Base64
+          <label htmlFor="base64Option">
+            <input type="radio" name="encodeType" id="base64Option" value="base64"
+              onChange={this.radioChanged} checked={this.state.encodeType === EncodeType.base64} />Base64
               </label>
-          </div>
         </div>
 
 
