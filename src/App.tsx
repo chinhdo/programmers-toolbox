@@ -75,7 +75,7 @@ class App extends Component<IProps, IState> {
 
   toggleMenu() {
     let responsiveMenuOn = !this.state.responsiveMenuOn;
-    this.setState({responsiveMenuOn: responsiveMenuOn});
+    this.setState({ responsiveMenuOn: responsiveMenuOn });
   }
 
   render() {
@@ -84,8 +84,13 @@ class App extends Component<IProps, IState> {
         <div className="App" onMouseUp={this.onMouseUp}>
           <nav id="sidebar" className={this.getClassName()}>
             <div className="closeBtn" onClick={() => this.toggleMenu}><i className="fas fa-bars"></i></div>
+            <div className="logo">
+              <Link className="logo" to="/">
+                <i className="fas fa-tools fa-fw"></i>
+                <div>Programmers' Toolbox by Chinh</div>
+              </Link>
+            </div>
             <ul className="list-unstyled components">
-              <li><Link to="/"><i className="fas fa-tools fa-fw"></i>Programmers' Toolbox by CD</Link></li>
               <li><Link to="/uuid"><i className="fas fa-fingerprint fa-fw"></i>UUID/GUID</Link></li>
               <li><Link to="/encode"><i className="far fa-file-code fa-fw"></i>Encode/Decode</Link></li>
               <li><Link to="/hash"><i className="fas fa-hashtag fa-fw"></i>Hashes</Link></li>
@@ -93,20 +98,20 @@ class App extends Component<IProps, IState> {
               <li><Link to="/format"><i className="fas fa-pencil-alt fa-fw"></i>Format</Link></li>
               <li><Link to="/testdata"><i className="fas fa-table fa-fw"></i>Generate Test Data</Link></li>
               {/* <li><Link to="/test"><i className="fas fa-table fa-fw"></i>Test</Link></li> */}
-              
-              {this.state.currentUser ? 
+
+              {this.state.currentUser ?
                 <div>
                   <li><Link to="" onClick={() => this.logOut()}><i className="fas fa-sign-out-alt fa-fw"></i>Logout</Link></li>
                   <li><Link to="/profile"><i className="fas fa-user-circle fa-fw"></i>{this.state.currentUser.displayName}</Link></li>
                 </div>
-                : 
+                :
                 <div>
                   <li><Link to="/signup"><i className="fas fa-user-plus fa-fw"></i>Sign up</Link></li>
                   <li><Link to="/login"><i className="fas fa-sign-in-alt fa-fw"></i>Login</Link></li>
                 </div>
               }
               <li><Link to="/faq"><i className="fas fa-question fa-fw"></i>FAQ</Link></li>
-            
+
             </ul>
           </nav>
 

@@ -17,6 +17,7 @@ class LoginAndSignUpPage extends Component<IProps, IState> {
   render() {
     return (
       <div className="login-and-sign-up">
+        <p>Log in to save your settings.</p>
         <Login />
       </div>
     );

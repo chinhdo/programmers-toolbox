@@ -1,6 +1,7 @@
 import React, { ChangeEvent, KeyboardEvent } from 'react';
 import BaseComponent from '../../components/shared/base.component';
 import sha256 from 'crypto-js/sha256';
+import md5 from 'crypto-js/md5';
 import './crypto-page.styles.scss';
 
 interface IProps { }
@@ -43,7 +44,7 @@ class CryptoPage extends BaseComponent<IProps, IState> {
         hashed = digest.toString();
         break;
       case HashType.md5:
-        hashed = 'TODO';
+        hashed = md5(this.state.input).toString();
         break;
       default:
         hashed = 'NA';
@@ -145,6 +146,7 @@ class CryptoPage extends BaseComponent<IProps, IState> {
     return (
       <div className="EncodingPage">
         <h1>Hashes</h1>
+        <p>MD5 hash generator. SHA-256 hash generator. Generate SHA 256, MD5 hashes online.</p>
         <div>
           <label htmlFor="sha256Option">
             <input type="radio" name="hashType" id="sha256Option" value="sha256"
@@ -174,10 +176,11 @@ class CryptoPage extends BaseComponent<IProps, IState> {
           <textarea spellCheck="false" value={this.state.output}></textarea>
         </div>
         <div className="about">
-          <h3>About SHA256 Hashes</h3>
-          <p>TODO</p>
+          <h3>About SHA-256 Hashes</h3>
+          <p>SHA-256 is one of the strongest hashing algorithms available. It encodes texts of any length into a string of 256 bits.</p>
           <h3>About MD5 Hashes</h3>
-          <p>TODO</p>
+          <p>The MD5 hash algorithm takes a string of any length and encode it into a 128-bit fingerprint. It's widely used but 
+            has been found to suffer from vulnerabilities.</p>
         </div>
       </div>
     );

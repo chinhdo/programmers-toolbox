@@ -1,5 +1,6 @@
 import React, { ChangeEvent, KeyboardEvent } from 'react';
 import BaseComponent from '../../components/shared/base.component';
+// TODO: Use crypto-js - it has Base64 too
 import HTMLDecoderEncoder from 'html-encoder-decoder';
 
 // TODO: Add info about HTML and Base64 encoding to info section.
@@ -214,7 +215,7 @@ class EncodingPage extends BaseComponent<IProps, IState> {
         </div>
         <div className="about">
           <h3>About URL Encoding</h3>
-          <p>URL encoding, also known as <a href="https://tools.ietf.org/html/rfc3986#section-2.1">Percent-encoding"</a>, converts characters into
+          <p>URL encoding, also known as <a href="https://tools.ietf.org/html/rfc3986#section-2.1">Percent-encoding</a>, converts characters into
           a format that can be transmitted safely over the internet. The two most frequently used applications are encoding charaters in a URL, and data for
           application/x-www-form-urlencoded media type, often used for submitting form data on web pages.
           </p>

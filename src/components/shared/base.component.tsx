@@ -23,7 +23,6 @@ class BaseComponent<P, S> extends Component<P, S> {
     if (this.timer) { clearTimeout(this.timer); }
 
     this.timer = setTimeout(() => {
-      console.log('Saved to LS.');
       ls.set(`${this.name}-state`, this.state);
     }, 1000);
   }

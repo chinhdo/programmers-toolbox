@@ -9,14 +9,12 @@
 }
 
 #sidebar {
-  min-width: 200px;
-  max-width: 200px;
+  min-width: 275px;
+  max-width: 275px;
   background:#1c2844;
   color: #fff;
   transition: all 0.3s;
   font-size: 0.7rem;
-  text-indent: -1.25rem;
-  padding-left: 2rem;
 }
 
 #sidebar.active {
@@ -86,13 +84,32 @@
 }
 
 #sidebar ul li a i {
-  margin-right: 0px;
+  margin-left: 5px;
+  margin-right: 10px;
 }
 
 .closeBtn {
   display: none;
   padding: 10px 30px 0px 15px; 
   font-size: 1.25rem
+}
+
+.logo {
+  margin: 15px 0px 0px 0px;
+  font-size: 2rem;
+  font-weight: 200;
+  text-align: center;
+  color: #007bff;
+}
+
+a.logo {
+  text-decoration: none;
+}
+
+.logo div {
+  font-size: 1.25rem;
+  padding: 0px 20px;
+  color: #e83e8c;
 }
 
 @keyframes menuOn {
