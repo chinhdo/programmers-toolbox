@@ -1,35 +1,21 @@
-.UuidGen {
-  width: 100%
-}
-
-.UuidGen .output {
-  padding: 20px 5px;
-}
-
-#ClipboardHelper {
-  display: none
-}
-
-div button:not(:first-of-type) {
-  margin-left: 15px
-}
-
-#content {
+.UuidGen {  
   width: 100%;
-  padding: 15px;
-  min-height: 100vh;
-  transition: all 0.3s;
-}
 
-header i {
-  font-size: 1.25rem;
-  padding-right: 0.75rem
-}
+  .output {
+    padding: 20px 5px;
+  }
 
-.three-bars {
-  display: none
-}
+  .m-fadeOut {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 2000ms, opacity 2000ms;
+    padding-left: 5px;
+  }
 
-@media (max-width: 768px) {
-  .three-bars {display: inline}
+  .m-fadeIn {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s linear 0s, opacity 2000ms;
+    padding-left: 5px;
+  }
 }

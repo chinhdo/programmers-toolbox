@@ -2,7 +2,7 @@ import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import short from 'short-uuid';
 import './uuid-page.styles.scss'
-import BaseComponent from '../../components/shared/base.component';
+import CopyToClipboard from 'react-copy-to-clipboard';
 
 interface IProps {
 
@@ -11,22 +11,23 @@ interface IProps {
 interface IState {
   showCopy: boolean;
   uuids: string[];
+  copyIdx: number;
 }
 
-class UuidGen extends BaseComponent<IProps, IState> {
+class UuidGen extends React.Component<IProps, IState> {
   constructor(props: IProps) {
-    super("UuidGen", props);
+    super(props);
     if (!this.state) {
       this.state = {
         showCopy: false,
-        uuids: []
+        uuids: [],
+        copyIdx: -1
       }
     }
 
     this.clear = this.clear.bind(this);
     this.uuid = this.uuid.bind(this);
     this.short = this.short.bind(this);
-    this.copyClipboard = this.copyClipboard.bind(this);
   }
 
   componentDidMount() {
@@ -34,16 +35,14 @@ class UuidGen extends BaseComponent<IProps, IState> {
     this.short();
   }
 
+  copy(idx: number) {
+    this.setState({copyIdx: idx});
+  }
+
   clear() {
     this.setState({ uuids: [] })
   }
 
-  copyClipboard(str: string) {
-    const el = document.getElementById('ClipboardHelper') as HTMLInputElement;
-    el.value = str;
-    el.select();
-    document.execCommand('copy');
-  }
 
   short() {
     const uuids = this.state.uuids;
@@ -59,11 +58,17 @@ class UuidGen extends BaseComponent<IProps, IState> {
   }
 
   render() {
-    this.saveStateToLocalStorage();
-
     const uuids = [];
     for (let i = 0; i < this.state.uuids.length; i++) {
-      uuids.push(<li key={i.toString()}>{this.state.uuids[i]} <i className="fas fa-copy"></i></li>);
+      uuids.push(
+        <CopyToClipboard key={i.toString()} text={this.state.uuids[i]} onCopy={()=> this.copy(i)}>
+          <li key={i.toString()}> {this.state.uuids[i]} <i className="fas fa-copy"></i>
+          <span className={i === this.state.copyIdx ? "m-fadeOut": "m-fadeIn"}>
+            {i === this.state.copyIdx ? "Copied" : ""}
+          </span>
+          </li>
+        </CopyToClipboard>
+      );
     }
 
     return (
@@ -78,12 +83,13 @@ class UuidGen extends BaseComponent<IProps, IState> {
             <p>We've created a standard v4 UUID and a short UUID for you.</p>
             <p>
               Click on the UUID button to generate an <a href="http://www.ietf.org/rfc/rfc4122.txt">RFC4122</a> UUID.
-                This generator uses the <a href="https://www.npmjs.com/package/uuid">uuid</a> npm package behind the scene. Version-4 UUIDs are generated using a random or pseudo-random number.
+                This generator uses the <a href="https://www.npmjs.com/package/uuid">uuid</a> npm package behind the scene. 
+                Version-4 UUIDs are generated using a random or pseudo-random number.
               </p>
-            <p>Click on the Short button to generate a shorter format UUID (based on the <a href="https://www.npmjs.com/package/short-uuid">short-uuid</a> npm package.)</p>
+            <p>Click on the Short button to generate a shorter format UUID (based on the 
+              <a href="https://www.npmjs.com/package/short-uuid">short-uuid</a> npm package.)</p>
           </div>
         </div>
-        <textarea id="ClipboardHelper"></textarea>
       </div>
     );
 

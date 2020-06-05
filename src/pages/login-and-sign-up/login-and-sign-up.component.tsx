@@ -6,12 +6,13 @@ interface IProps {}
 
 interface IState {}
 
+// TODO: Show login info after logged in
+
 class LoginAndSignUpPage extends Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
     this.state = {
     }
-
   }
 
   render() {
