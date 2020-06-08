@@ -16,7 +16,6 @@ class HomePage extends Component<IProps, IState> {
   }
 
   render() {
-    // TODO #1 Add links to tools from home page - test one two three.
     return (
       <div className="HomePage">
         <h1>Programmers' Toolbox by Chinh Do</h1>

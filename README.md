@@ -5,14 +5,10 @@ There are free online tools for most of these things out there already, but many
 ## Misc TODOs
 * Google Analytics
 * Logos in manifest.json - do I need them?
-* Use SCSS or SASS
-* Toggle sidebar
 * When minimized - still show a thin sidebar
 * Lazy modules
 * SEO
-* Task to auto deploy to PROD using RSYNC
 * Usage metrics (which tools is used the most - order by usage)
-react
 
 Notes
 * Expandable sidebar based on [Bootstrap Sidebar](https://bootstrapious.com/p/bootstrap-sidebar)

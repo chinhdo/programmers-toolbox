@@ -1,12 +1,10 @@
 import React, { ChangeEvent, KeyboardEvent } from 'react';
 import BaseComponent from '../../components/shared/base.component';
-// TODO: Use crypto-js - it has Base64 too
 import HTMLDecoderEncoder from 'html-encoder-decoder';
 
-// TODO: Add info about HTML and Base64 encoding to info section.
-// TODO: Bug - Encode undo indent
-
 import './encoding-page.styles.scss';
+
+// TODO: Save form state (with Redux?)
 
 interface IProps { }
 
@@ -40,8 +38,6 @@ class EncodingPage extends BaseComponent<IProps, IState> {
     this.radioChanged = this.radioChanged.bind(this);
     this.saveStateToLocalStorage = this.saveStateToLocalStorage.bind(this);
   }
-
-  // TODO: Save form state (with Redux?)
 
   decode() {
     let decoded: string;
@@ -157,10 +153,13 @@ class EncodingPage extends BaseComponent<IProps, IState> {
           ta.selectionEnd = s2 + charsAdded;
         }
       }
+
+      this.setState({ input: ta.value }, this.encode);
     }
   }
 
   inputChanged(e: ChangeEvent<HTMLTextAreaElement>) {
+    console.log("input changed");
     this.setState({ input: e.target.value }, this.encode);
   }
 
@@ -170,7 +169,7 @@ class EncodingPage extends BaseComponent<IProps, IState> {
 
   radioChanged(e: ChangeEvent<HTMLInputElement>) {
     const value: string = (e.target as HTMLInputElement).value;
-    this.setState({ encodeType: EncodeType[value as keyof typeof EncodeType] })
+    this.setState({ encodeType: EncodeType[value as keyof typeof EncodeType] }, this.encode)    
   }
 
   render() {

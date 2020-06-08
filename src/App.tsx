@@ -9,8 +9,7 @@ import { createUserProfileDocument, auth } from './utils/firebase.utils';
 
 import './App.scss';
 import CryptoPage from './pages/crypto/crypto-page.component';
-
-// TODO #2 Tab/shift-tab indentation changes do not persist to local storage correctly
+import ProfilePage from './pages/profile/profile-page.component';
 
 interface IProps extends Readonly<{ name: string }> { }
 
@@ -106,7 +105,7 @@ class App extends Component<IProps, IState> {
                 </div>
                 :
                 <div>
-                  <li><Link to="/signup"><i className="fas fa-user-plus fa-fw"></i>Sign up</Link></li>
+                  {/* TODO <li><Link to="/signup"><i className="fas fa-user-plus fa-fw"></i>Sign up</Link></li> */}
                   <li><Link to="/login"><i className="fas fa-sign-in-alt fa-fw"></i>Login</Link></li>
                 </div>
               }
@@ -127,6 +126,7 @@ class App extends Component<IProps, IState> {
               <Route path="/encode"><EncodingPage /></Route>
               <Route path="/hash"><CryptoPage /></Route>
               <Route path="/login"><LoginAndSignUpPage /></Route>
+              <Route path="/profile"><ProfilePage currentUser={this.state.currentUser} /></Route>
               <Route exact path="/"><HomePage /></Route>
             </Switch>
             <Footer />
