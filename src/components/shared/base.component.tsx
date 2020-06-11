@@ -19,7 +19,7 @@ class BaseComponent<P, S> extends Component<P, S> {
 
   timer!: NodeJS.Timeout;
 
-  saveStateToLocalStorage() {
+  saveStateToLocalStorage(): void {
     if (this.timer) { clearTimeout(this.timer); }
 
     this.timer = setTimeout(() => {

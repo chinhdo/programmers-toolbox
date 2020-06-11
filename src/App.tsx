@@ -1,4 +1,4 @@
-import React, { Component, MouseEvent } from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
 import UuidGen from './pages/uuid-gen/uuid-page.component';
 import { Footer } from './components/shared/footer.component';
@@ -6,20 +6,21 @@ import HomePage from './pages/home/homepage.component';
 import EncodingPage from './pages/encoding/encoding-page.component';
 import LoginAndSignUpPage from './pages/login-and-sign-up/login-and-sign-up.component';
 import { createUserProfileDocument, auth } from './utils/firebase.utils';
-
-import './App.scss';
 import CryptoPage from './pages/crypto/crypto-page.component';
 import ProfilePage from './pages/profile/profile-page.component';
+import './App.scss';
 
-interface IProps extends Readonly<{ name: string }> { }
+type Props = {
 
-interface IState {
-  currentUser: any; // TODO
+}
+
+type State = {
+  currentUser: firebase.User | null;
   responsiveMenuOn: boolean;
 }
 
-class App extends Component<IProps, IState> {
-  constructor(props: IProps) {
+class App extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -31,20 +32,22 @@ class App extends Component<IProps, IState> {
     this.toggleMenu = this.toggleMenu.bind(this);
   }
 
-  unsubscribeFromAuth: any; // TODO
+  unsubscribeFromAuth: firebase.Unsubscribe | undefined;
 
-  componentDidMount() {
+  componentDidMount():void {
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth, null);
 
+        // TODO: Fix this
         userRef?.onSnapshot(snapShot => {
-          this.setState({
-            currentUser: {
-              id: snapShot.id,
-              ...snapShot.data()
-            }
-          });
+          console.log('TODO', snapShot);
+          // this.setState({
+          //   currentUser: {
+          //     id: snapShot.id,
+          //     ...snapShot.data()
+          //   }
+          // });
         });
       }
 
@@ -53,31 +56,33 @@ class App extends Component<IProps, IState> {
     });
   }
 
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
+  componentWillUnmount(): void {
+    if (this.unsubscribeFromAuth) {
+      this.unsubscribeFromAuth();
+    }
   }
 
-  getClassName() {
+  getClassName(): string {
     return this.state.responsiveMenuOn ? 'on' : 'off';
   }
 
-  logOut() {
+  logOut(): void {
     console.log('Logging out.');
     auth.signOut();
   }
 
-  onMouseUp(e: MouseEvent) {
+  onMouseUp(): void {
     if (this.state.responsiveMenuOn) {
       this.toggleMenu();
     }
   }
 
-  toggleMenu() {
-    let responsiveMenuOn = !this.state.responsiveMenuOn;
+  toggleMenu(): void {
+    const responsiveMenuOn = !this.state.responsiveMenuOn;
     this.setState({ responsiveMenuOn: responsiveMenuOn });
   }
 
-  render() {
+  render(): React.ReactNode {
     return (
       <BrowserRouter>
         <div className="App" onMouseUp={this.onMouseUp}>
@@ -96,7 +101,6 @@ class App extends Component<IProps, IState> {
               <li><Link to="/lorem"><i className="fas fa-file-alt fa-fw"></i>Generate Lorem Ipsum</Link></li>
               <li><Link to="/format"><i className="fas fa-pencil-alt fa-fw"></i>Format</Link></li>
               <li><Link to="/testdata"><i className="fas fa-table fa-fw"></i>Generate Test Data</Link></li>
-              {/* <li><Link to="/test"><i className="fas fa-table fa-fw"></i>Test</Link></li> */}
 
               {this.state.currentUser ?
                 <div>
@@ -105,7 +109,6 @@ class App extends Component<IProps, IState> {
                 </div>
                 :
                 <div>
-                  {/* TODO <li><Link to="/signup"><i className="fas fa-user-plus fa-fw"></i>Sign up</Link></li> */}
                   <li><Link to="/login"><i className="fas fa-sign-in-alt fa-fw"></i>Login</Link></li>
                 </div>
               }

@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import './footer.styles.scss'
 
-interface IState {
+type State = {
   
 }
 
-interface IProps {
+type Props = {
 
 }
 
-export class Footer extends Component<IProps, IState> {
-  render() {
+export class Footer extends Component<Props, State> {
+  render(): React.ReactNode {
     return (
       <div className='Footer'>
         <h3>About this app</h3>
