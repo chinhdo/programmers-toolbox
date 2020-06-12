@@ -1,19 +1,22 @@
 import React from 'react';
 import { signInWithGoogle } from '../../utils/firebase.utils';
-
 import './login.styles.scss';
 import { Redirect } from 'react-router-dom';
 
-interface IProps { }
 
-interface IState {
+type Props = {
+
+};
+
+type State = {
   email: string,
   password: string,
   redirectToProfile: boolean
 }
 
-class Login extends React.Component<IProps, IState> {
-  constructor(props: IProps) {
+class Login extends React.Component<Props, State> {
+  constructor(props: Props) {
+
     super(props);
 
     this.state = {
@@ -25,16 +28,17 @@ class Login extends React.Component<IProps, IState> {
     this.login = this.login.bind(this);
   }
 
-  login() {
+  login(): void {
     signInWithGoogle().then( (result) => {
       // This gives you a Google Access Token. You can use it to access the Google API.
+      console.log(result); // TODO
       this.setState({ redirectToProfile: true });
     }).catch(function (error) {
       console.error(error);
     });
   }
 
-  render() {
+  render(): React.ReactNode {
 
     if (this.state.redirectToProfile) {
       return (<Redirect to="/"/>);

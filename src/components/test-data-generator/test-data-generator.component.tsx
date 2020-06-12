@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 import './test-data-generator.scss';
 
-interface IProps {
+type Props = {
 
 }
 
-interface IState {
+type State = {
 }
 
-class TestDataGenerator extends Component<IProps, IState> {
-  constructor(props: IProps) {
+class TestDataGenerator extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {
     }
 
   }
 
-  render() {
+  render(): React.ReactNode {
     return (
       <div className="TestDataGenerator">
         TEST DATA GENERATOR

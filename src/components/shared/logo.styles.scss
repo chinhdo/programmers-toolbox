@@ -1,0 +1,40 @@
+.LogoComp {
+  text-align: center;
+  
+  #logo {
+    // padding: 10px
+    width: 33%;
+  }
+
+  path {
+    stroke: white;
+    fill-opacity: 25%;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  
+    animation: move 1.5s linear;
+    animation-fill-mode: forwards;
+
+  }
+
+  .top {
+    stroke-width: 4px;
+  }
+
+  .mid {
+    stroke-width: 2px;
+    stroke-opacity: 100%;
+  }
+
+  .bottom {
+    stroke-width: 1px;
+    stroke-opacity: 33%;
+  }
+  
+  @keyframes move {
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+}
