@@ -17,19 +17,19 @@ class HomePage extends Component<Props, State> {
     super(props);
     this.state = {
     }
-  }  
+  }
 
   render(): React.ReactNode {
     return (
       <div className="HomePage">
         <h1>Programmers' Toolbox</h1>
-        <strong>by <a href="https://twitter.com/chinhdo">Chinh Do</a></strong>
-        <div className="logo"><Logo/></div>
+        <h2>by <a href="https://twitter.com/chinhdo">Chinh Do</a></h2>
         <p>
           Hello fellow programmer (or non-programmer <span role="img" aria-label="smiley face">😄</span> - we all need to generate a GUID from time to time - no judging here)!
           I am hoping to make this site the best place for frequently used tools like encoding/decoding, hashing things, generating UUIDs, etc.
           This site is entirely client-side so that once the site is loaded, everything will happen on your browser and should be very fast.
         </p>
+        <div className="logo"><Logo /></div>
         <p>
           This site uses browser local storage to remember settings.
         </p>

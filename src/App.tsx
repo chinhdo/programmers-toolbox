@@ -98,9 +98,9 @@ class App extends Component<Props, State> {
               <li><Link to="/uuid"><i className="fas fa-fingerprint fa-fw"></i>UUID/GUID</Link></li>
               <li><Link to="/encode"><i className="far fa-file-code fa-fw"></i>Encode/Decode</Link></li>
               <li><Link to="/hash"><i className="fas fa-hashtag fa-fw"></i>Hashes</Link></li>
-              <li><Link to="/lorem"><i className="fas fa-file-alt fa-fw"></i>Generate Lorem Ipsum</Link></li>
+              <li><Link to="/lorem"><i className="fas fa-file-alt fa-fw"></i>Lorem Ipsum</Link></li>
               <li><Link to="/format"><i className="fas fa-pencil-alt fa-fw"></i>Format</Link></li>
-              <li><Link to="/testdata"><i className="fas fa-table fa-fw"></i>Generate Test Data</Link></li>
+              <li><Link to="/testdata"><i className="fas fa-table fa-fw"></i>Test Data</Link></li>
 
               {this.state.currentUser ?
                 <div>
