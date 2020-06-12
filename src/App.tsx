@@ -9,6 +9,7 @@ import { createUserProfileDocument, auth } from './utils/firebase.utils';
 import CryptoPage from './pages/crypto/crypto-page.component';
 import ProfilePage from './pages/profile/profile-page.component';
 import './App.scss';
+import Logo from './components/shared/logo.component';
 
 type Props = {
 
@@ -88,10 +89,9 @@ class App extends Component<Props, State> {
         <div className="App" onMouseUp={this.onMouseUp}>
           <nav id="sidebar" className={this.getClassName()}>
             <div className="closeBtn" onClick={() => this.toggleMenu}><i className="fas fa-bars"></i></div>
-            <div className="logo">
+            <div className="logo">              
               <Link className="logo" to="/">
-                <i className="fas fa-tools fa-fw"></i>
-                <div>Programmers' Toolbox by Chinh</div>
+                <Logo />
               </Link>
             </div>
             <ul className="list-unstyled components">

@@ -2,23 +2,29 @@ import React, { Component } from 'react';
 
 import './homepage.styles.scss';
 import { Link } from 'react-router-dom';
+import Logo from '../../components/shared/logo.component';
 
-interface IProps { }
+type Props = {
 
-interface IState { }
+}
 
-class HomePage extends Component<IProps, IState> {
-  constructor(props: IProps) {
+type State = {
+
+}
+
+class HomePage extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {
     }
+  }  
 
-  }
-
-  render() {
+  render(): React.ReactNode {
     return (
       <div className="HomePage">
-        <h1>Programmers' Toolbox by Chinh Do</h1>
+        <h1>Programmers' Toolbox</h1>
+        <strong>by <a href="https://twitter.com/chinhdo">Chinh Do</a></strong>
+        <div className="logo"><Logo/></div>
         <p>
           Hello fellow programmer (or non-programmer <span role="img" aria-label="smiley face">😄</span> - we all need to generate a GUID from time to time - no judging here)!
           I am hoping to make this site the best place for frequently used tools like encoding/decoding, hashing things, generating UUIDs, etc.
