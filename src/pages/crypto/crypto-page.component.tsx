@@ -4,19 +4,18 @@ import sha256 from 'crypto-js/sha256';
 import md5 from 'crypto-js/md5';
 import './crypto-page.styles.scss';
 
-type Props = {
-
- }
+type Props = Record<string, unknown>;
 
 enum HashType {
-  md5 = "md5", sha256 = "sha256"
+  md5 = 'md5',
+  sha256 = 'sha256',
 }
 
 type State = {
   hashType: HashType;
   input: string;
   output: string;
-}
+};
 
 class CryptoPage extends BaseComponent<Props, State> {
   constructor(props: Props) {
@@ -26,7 +25,7 @@ class CryptoPage extends BaseComponent<Props, State> {
       this.state = {
         input: '',
         output: '',
-        hashType: HashType.sha256
+        hashType: HashType.sha256,
       };
     }
 
@@ -40,12 +39,11 @@ class CryptoPage extends BaseComponent<Props, State> {
   hash(): void {
     let hashed = '';
     switch (this.state.hashType) {
-      case HashType.sha256:
-        {
-          const digest = sha256(this.state.input);
-          hashed = digest.toString();
-          break;
-        }
+      case HashType.sha256: {
+        const digest = sha256(this.state.input);
+        hashed = digest.toString();
+        break;
+      }
       case HashType.md5:
         hashed = md5(this.state.input).toString();
         break;
@@ -84,12 +82,12 @@ class CryptoPage extends BaseComponent<Props, State> {
             ta.selectionStart = s1 > 1 ? s1 - 2 : 0;
             ta.selectionEnd = ta.selectionStart;
           }
-        }
-        else {
+        } else {
           ta.focus();
           document.execCommand('insertText', false, '  ');
         }
-      } else { // text selected
+      } else {
+        // text selected
         const p1 = s1 === 0 ? 0 : Math.max(text.lastIndexOf('\n', s1 - 1) + 1, 0); // Start of current line
         let p2 = text.indexOf('\n', s2);
         p2 = p2 === -1 ? text.length : p2;
@@ -140,7 +138,7 @@ class CryptoPage extends BaseComponent<Props, State> {
 
   radioChanged(e: ChangeEvent<HTMLInputElement>): void {
     const value: string = (e.target as HTMLInputElement).value;
-    this.setState({ hashType: HashType[value as keyof typeof HashType] })
+    this.setState({ hashType: HashType[value as keyof typeof HashType] });
   }
 
   render(): React.ReactNode {
@@ -152,27 +150,43 @@ class CryptoPage extends BaseComponent<Props, State> {
         <p>MD5 hash generator. SHA-256 hash generator. Generate SHA 256, MD5 hashes online.</p>
         <div>
           <label htmlFor="sha256Option">
-            <input type="radio" name="hashType" id="sha256Option" value="sha256"
-              onChange={this.radioChanged} checked={this.state.hashType === HashType.sha256} />SHA256
+            <input
+              type="radio"
+              name="hashType"
+              id="sha256Option"
+              value="sha256"
+              onChange={this.radioChanged}
+              checked={this.state.hashType === HashType.sha256}
+            />
+            SHA256
           </label>
           <label htmlFor="md5Option">
-            <input type="radio" name="hashType" id="md5Option" value="md5"
-              onChange={this.radioChanged} checked={this.state.hashType === HashType.md5} />md5
+            <input
+              type="radio"
+              name="hashType"
+              id="md5Option"
+              value="md5"
+              onChange={this.radioChanged}
+              checked={this.state.hashType === HashType.md5}
+            />
+            md5
           </label>
         </div>
 
-
         {/* INPUT */}
         <div className="input">
-          <textarea spellCheck="false" value={this.state.input}
+          <textarea
+            spellCheck="false"
+            value={this.state.input}
             onChange={(ev: ChangeEvent<HTMLTextAreaElement>): void => this.inputChanged(ev)}
             onKeyDown={(ev) => this.keydown(ev)}
           ></textarea>
         </div>
         {/* Buttons */}
         <div className="buttons">
-          <button className="btn btn-outline-primary" title="Hash"
-            onClick={this.hash}>Hash <i className="fas fa-arrow-down"></i></button>
+          <button className="btn btn-outline-primary" title="Hash" onClick={this.hash}>
+            Hash <i className="fas fa-arrow-down"></i>
+          </button>
         </div>
         {/* OUTPUT */}
         <div className="output">
@@ -180,10 +194,15 @@ class CryptoPage extends BaseComponent<Props, State> {
         </div>
         <div className="about">
           <h3>About SHA-256 Hashes</h3>
-          <p>SHA-256 is one of the strongest hashing algorithms available. It encodes texts of any length into a string of 256 bits.</p>
+          <p>
+            SHA-256 is one of the strongest hashing algorithms available. It encodes texts of any length into a string
+            of 256 bits.
+          </p>
           <h3>About MD5 Hashes</h3>
-          <p>The MD5 hash algorithm takes a string of any length and encode it into a 128-bit fingerprint. It&apos;s widely used but 
-            has been found to suffer from vulnerabilities.</p>
+          <p>
+            The MD5 hash algorithm takes a string of any length and encode it into a 128-bit fingerprint. It&apos;s
+            widely used but has been found to suffer from vulnerabilities.
+          </p>
         </div>
       </div>
     );

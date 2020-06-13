@@ -1,1 +1,1 @@
-declare module "html-encoder-decoder";
+declare module 'html-encoder-decoder';

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import UuidGen from './pages/uuid-gen/uuid-page.component';
 import { Footer } from './components/shared/footer.component';
 import HomePage from './pages/home/homepage.component';
@@ -12,14 +12,12 @@ import './App.scss';
 import Logo from './components/shared/logo.component';
 import LoremPage from './pages/lorem/lorem-page.component';
 
-type Props = {
-
-}
+type Props = Record<string, unknown>;
 
 type State = {
   currentUser: firebase.User | null;
   responsiveMenuOn: boolean;
-}
+};
 
 class App extends Component<Props, State> {
   constructor(props: Props) {
@@ -27,8 +25,8 @@ class App extends Component<Props, State> {
 
     this.state = {
       currentUser: null,
-      responsiveMenuOn: false
-    }
+      responsiveMenuOn: false,
+    };
 
     this.onMouseUp = this.onMouseUp.bind(this);
     this.toggleMenu = this.toggleMenu.bind(this);
@@ -36,8 +34,8 @@ class App extends Component<Props, State> {
 
   unsubscribeFromAuth: firebase.Unsubscribe | undefined;
 
-  componentDidMount():void {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+  componentDidMount(): void {
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await createUserProfileDocument({ userAuth, additionalData: null });
 
@@ -47,8 +45,8 @@ class App extends Component<Props, State> {
           this.setState({
             currentUser: {
               id: snapShot.id,
-              ...snapShot.data()
-            }
+              ...snapShot.data(),
+            },
           });
         });
       }
@@ -87,32 +85,74 @@ class App extends Component<Props, State> {
       <BrowserRouter>
         <div className="App" onMouseUp={this.onMouseUp}>
           <nav id="sidebar" className={this.getClassName()}>
-            <div className="closeBtn" onClick={() => this.toggleMenu}><i className="fas fa-bars"></i></div>
-            <div className="logo">              
+            <div className="closeBtn" onClick={() => this.toggleMenu}>
+              <i className="fas fa-bars"></i>
+            </div>
+            <div className="logo">
               <Link className="logo" to="/">
                 <Logo />
               </Link>
             </div>
             <ul className="list-unstyled components">
-              <li><Link to="/uuid"><i className="fas fa-fingerprint fa-fw"></i>UUID/GUID</Link></li>
-              <li><Link to="/encode"><i className="far fa-file-code fa-fw"></i>Encode/Decode</Link></li>
-              <li><Link to="/hash"><i className="fas fa-hashtag fa-fw"></i>Hashes</Link></li>
-              <li><Link to="/lorem-ipsum"><i className="fas fa-file-alt fa-fw"></i>Lorem Ipsum</Link></li>
-              <li><Link to="/format"><i className="fas fa-pencil-alt fa-fw"></i>Format</Link></li>
-              <li><Link to="/testdata"><i className="fas fa-table fa-fw"></i>Test Data</Link></li>
+              <li>
+                <Link to="/uuid">
+                  <i className="fas fa-fingerprint fa-fw"></i>UUID/GUID
+                </Link>
+              </li>
+              <li>
+                <Link to="/encode">
+                  <i className="far fa-file-code fa-fw"></i>Encode/Decode
+                </Link>
+              </li>
+              <li>
+                <Link to="/hash">
+                  <i className="fas fa-hashtag fa-fw"></i>Hashes
+                </Link>
+              </li>
+              <li>
+                <Link to="/lorem-ipsum">
+                  <i className="fas fa-file-alt fa-fw"></i>Lorem Ipsum
+                </Link>
+              </li>
+              <li>
+                <Link to="/format">
+                  <i className="fas fa-pencil-alt fa-fw"></i>Format
+                </Link>
+              </li>
+              <li>
+                <Link to="/testdata">
+                  <i className="fas fa-table fa-fw"></i>Test Data
+                </Link>
+              </li>
 
-              {this.state.currentUser ?
+              {this.state.currentUser ? (
                 <div>
-                  <li><Link to="" onClick={() => this.logOut()}><i className="fas fa-sign-out-alt fa-fw"></i>Logout</Link></li>
-                  <li><Link to="/profile"><i className="fas fa-user-circle fa-fw"></i>{this.state.currentUser.displayName}</Link></li>
+                  <li>
+                    <Link to="" onClick={() => this.logOut()}>
+                      <i className="fas fa-sign-out-alt fa-fw"></i>Logout
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/profile">
+                      <i className="fas fa-user-circle fa-fw"></i>
+                      {this.state.currentUser.displayName}
+                    </Link>
+                  </li>
                 </div>
-                :
+              ) : (
                 <div>
-                  <li><Link to="/login"><i className="fas fa-sign-in-alt fa-fw"></i>Login</Link></li>
+                  <li>
+                    <Link to="/login">
+                      <i className="fas fa-sign-in-alt fa-fw"></i>Login
+                    </Link>
+                  </li>
                 </div>
-              }
-              <li><Link to="/faq"><i className="fas fa-question fa-fw"></i>FAQ</Link></li>
-
+              )}
+              <li>
+                <Link to="/faq">
+                  <i className="fas fa-question fa-fw"></i>FAQ
+                </Link>
+              </li>
             </ul>
           </nav>
 
@@ -124,13 +164,27 @@ class App extends Component<Props, State> {
               </div>
             </header>
             <Switch>
-              <Route path="/uuid"><UuidGen /></Route>
-              <Route path="/encode"><EncodingPage /></Route>
-              <Route path="/hash"><CryptoPage /></Route>
-              <Route path="/lorem-ipsum"><LoremPage /></Route>
-              <Route path="/login"><LoginAndSignUpPage /></Route>
-              <Route path="/profile"><ProfilePage currentUser={this.state.currentUser} /></Route>
-              <Route exact path="/"><HomePage /></Route>
+              <Route path="/uuid">
+                <UuidGen />
+              </Route>
+              <Route path="/encode">
+                <EncodingPage />
+              </Route>
+              <Route path="/hash">
+                <CryptoPage />
+              </Route>
+              <Route path="/lorem-ipsum">
+                <LoremPage />
+              </Route>
+              <Route path="/login">
+                <LoginAndSignUpPage />
+              </Route>
+              <Route path="/profile">
+                <ProfilePage currentUser={this.state.currentUser} />
+              </Route>
+              <Route exact path="/">
+                <HomePage />
+              </Route>
             </Switch>
             <Footer />
           </div>

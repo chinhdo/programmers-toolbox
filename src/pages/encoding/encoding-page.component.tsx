@@ -1,24 +1,21 @@
 import React, { ChangeEvent, KeyboardEvent } from 'react';
 import BaseComponent from '../../components/shared/base.component';
 import HTMLDecoderEncoder from 'html-encoder-decoder';
-
 import './encoding-page.styles.scss';
 
-// TODO: Save form state (with Redux?)
-
-type Props = {
-
- }
+type Props = Record<string, unknown>;
 
 enum EncodeType {
-  url = "url", html = "html", base64 = "base64"
+  url = 'url',
+  html = 'html',
+  base64 = 'base64',
 }
 
 type State = {
   encodeType: EncodeType;
   input: string;
   output: string;
-}
+};
 
 class EncodingPage extends BaseComponent<Props, State> {
   constructor(props: Props) {
@@ -28,7 +25,7 @@ class EncodingPage extends BaseComponent<Props, State> {
       this.state = {
         input: '',
         output: '',
-        encodeType: EncodeType.url
+        encodeType: EncodeType.url,
       };
     }
 
@@ -108,12 +105,12 @@ class EncodingPage extends BaseComponent<Props, State> {
             ta.selectionStart = s1 > 1 ? s1 - 2 : 0;
             ta.selectionEnd = ta.selectionStart;
           }
-        }
-        else {
+        } else {
           ta.focus();
           document.execCommand('insertText', false, '  ');
         }
-      } else { // text selected
+      } else {
+        // text selected
         const p1 = s1 === 0 ? 0 : Math.max(text.lastIndexOf('\n', s1 - 1) + 1, 0); // Start of current line
         let p2 = text.indexOf('\n', s2);
         p2 = p2 === -1 ? text.length : p2;
@@ -170,7 +167,7 @@ class EncodingPage extends BaseComponent<Props, State> {
 
   radioChanged(e: ChangeEvent<HTMLInputElement>): void {
     const value: string = (e.target as HTMLInputElement).value;
-    this.setState({ encodeType: EncodeType[value as keyof typeof EncodeType] }, this.encode)    
+    this.setState({ encodeType: EncodeType[value as keyof typeof EncodeType] }, this.encode);
   }
 
   render(): React.ReactNode {
@@ -181,55 +178,97 @@ class EncodingPage extends BaseComponent<Props, State> {
         <h1>HTML Encoder/Decoder, URL Encoder/Decoder & Base64 Encoder</h1>
         <div>
           <label htmlFor="urlOption">
-            <input type="radio" name="encodeType" id="urlOption" value="url"
-              onChange={this.radioChanged} checked={this.state.encodeType === EncodeType.url} />URL
-            </label>
+            <input
+              type="radio"
+              name="encodeType"
+              id="urlOption"
+              value="url"
+              onChange={this.radioChanged}
+              checked={this.state.encodeType === EncodeType.url}
+            />
+            URL
+          </label>
           <label htmlFor="htmlOption">
-            <input type="radio" name="encodeType" id="htmlOption" value="html"
-              onChange={this.radioChanged} checked={this.state.encodeType === EncodeType.html} />HTML
-            </label>
+            <input
+              type="radio"
+              name="encodeType"
+              id="htmlOption"
+              value="html"
+              onChange={this.radioChanged}
+              checked={this.state.encodeType === EncodeType.html}
+            />
+            HTML
+          </label>
           <label htmlFor="base64Option">
-            <input type="radio" name="encodeType" id="base64Option" value="base64"
-              onChange={this.radioChanged} checked={this.state.encodeType === EncodeType.base64} />Base64
-              </label>
+            <input
+              type="radio"
+              name="encodeType"
+              id="base64Option"
+              value="base64"
+              onChange={this.radioChanged}
+              checked={this.state.encodeType === EncodeType.base64}
+            />
+            Base64
+          </label>
         </div>
-
 
         {/* INPUT */}
         <div className="input">
-          <textarea spellCheck="false" value={this.state.input}
+          <textarea
+            spellCheck="false"
+            value={this.state.input}
             onChange={(ev: ChangeEvent<HTMLTextAreaElement>): void => this.inputChanged(ev)}
             onKeyDown={(ev) => this.keydown(ev)}
           ></textarea>
         </div>
         <div className="buttons">
-          <button className="btn btn-outline-primary" title="Encode"
-            onClick={this.encode}>Encode <i className="fas fa-arrow-down"></i></button>
-          <button className="btn btn-outline-secondary" title="Encode"
-            onClick={this.decode}>Decode <i className="fas fa-arrow-up"></i></button>
+          <button className="btn btn-outline-primary" title="Encode" onClick={this.encode}>
+            Encode <i className="fas fa-arrow-down"></i>
+          </button>
+          <button className="btn btn-outline-secondary" title="Encode" onClick={this.decode}>
+            Decode <i className="fas fa-arrow-up"></i>
+          </button>
         </div>
         {/* OUTPUT */}
         <div className="output">
-          <textarea spellCheck="false" value={this.state.output}
-            onChange={(ev: ChangeEvent<HTMLTextAreaElement>) => this.outputChanged(ev)}></textarea>
+          <textarea
+            spellCheck="false"
+            value={this.state.output}
+            onChange={(ev: ChangeEvent<HTMLTextAreaElement>) => this.outputChanged(ev)}
+          ></textarea>
         </div>
         <div className="about">
           <h3>About URL Encoding</h3>
-          <p>URL encoding, also known as <a href="https://tools.ietf.org/html/rfc3986#section-2.1">Percent-encoding</a>, converts characters into
-          a format that can be transmitted safely over the internet. The two most frequently used applications are encoding charaters in a URL, and data for
-          application/x-www-form-urlencoded media type, often used for submitting form data on web pages.
+          <p>
+            URL encoding, also known as <a href="https://tools.ietf.org/html/rfc3986#section-2.1">Percent-encoding</a>,
+            converts characters into a format that can be transmitted safely over the internet. The two most frequently
+            used applications are encoding charaters in a URL, and data for application/x-www-form-urlencoded media
+            type, often used for submitting form data on web pages.
           </p>
-          <p>Per <a href="https://tools.ietf.org/html/rfc3986">RFC 3986</a>, the list of reserved characters for Percent-encoding are: ! * &apos; ( ) ; : @ & = + $ , / ? # [ ].</p>
-          <p>The reserved character is encoded by concatenating the % sign with the corresponding byte value of the character in hex.</p>
-          <p>In JavaScript code the built-in functions encodeURIComponent and decodeURIComponent are used to perform URL encoding/decoding. In fact that&apos;s basically the code behind the URL encoding/decoding feature of this page.</p>
+          <p>
+            Per <a href="https://tools.ietf.org/html/rfc3986">RFC 3986</a>, the list of reserved characters for
+            Percent-encoding are: ! * &apos; ( ) ; : @ & = + $ , / ? # [ ].
+          </p>
+          <p>
+            The reserved character is encoded by concatenating the % sign with the corresponding byte value of the
+            character in hex.
+          </p>
+          <p>
+            In JavaScript code the built-in functions encodeURIComponent and decodeURIComponent are used to perform URL
+            encoding/decoding. In fact that&apos;s basically the code behind the URL encoding/decoding feature of this
+            page.
+          </p>
           <h3>About HTML Entity Encoding</h3>
-          <p>HTML Entity Encoding encodes reserved HTML characters so that the data can be safely embedded in HTML. A character Entity
-          looks like this: [&entity_name;] OR [&#entity_number;]. For example, to include the &lt; sign in HTML we must write
-            &amp;lt; or &amp;#60;</p>
+          <p>
+            HTML Entity Encoding encodes reserved HTML characters so that the data can be safely embedded in HTML. A
+            character Entity looks like this: [&entity_name;] OR [&#entity_number;]. For example, to include the &lt;
+            sign in HTML we must write &amp;lt; or &amp;#60;
+          </p>
           <h3>About Base64 Encoding</h3>
-          <p>Base64 encoding represents binary data in ASCII string format by translating it into a radix-64 reprensentation.
-          Base64 is designed to cary data safely in channels that only reliably support text content.
-            </p>
+          <p>
+            Base64 encoding represents binary data in ASCII string format by translating it into a radix-64
+            reprensentation. Base64 is designed to cary data safely in channels that only reliably support text content.
+          </p>
         </div>
       </div>
     );

@@ -1,22 +1,17 @@
 import React, { Component } from 'react';
-import './login-and-sign-up.styles.scss'
+import './login-and-sign-up.styles.scss';
 import Login from '../../components/login/login.component';
 
-type Props = {
+type Props = Record<string, unknown>;
 
-}
-
-type State = {
-
-}
+type State = Record<string, unknown>;
 
 // TODO: Show login info after logged in
 
 class LoginAndSignUpPage extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.state = {
-    }
+    this.state = {};
   }
 
   render(): React.ReactNode {
@@ -26,7 +21,6 @@ class LoginAndSignUpPage extends Component<Props, State> {
         <Login />
       </div>
     );
-
   }
 }
 

@@ -3,21 +3,25 @@ import 'firebase/firestore';
 import 'firebase/auth';
 
 const config = {
-  apiKey: "AIzaSyDKWlEqG2F6rmT7SKVzZtxpn70k9yjKAVw",
-  authDomain: "programmers-toolbox.firebaseapp.com",
-  databaseURL: "https://programmers-toolbox.firebaseio.com",
-  projectId: "programmers-toolbox",
-  storageBucket: "programmers-toolbox.appspot.com",
-  messagingSenderId: "274626777839",
-  appId: "1:274626777839:web:7a0c447edb47a56abb411a",
-  measurementId: "G-L73L8DSN5R"
+  apiKey: 'AIzaSyDKWlEqG2F6rmT7SKVzZtxpn70k9yjKAVw',
+  authDomain: 'programmers-toolbox.firebaseapp.com',
+  databaseURL: 'https://programmers-toolbox.firebaseio.com',
+  projectId: 'programmers-toolbox',
+  storageBucket: 'programmers-toolbox.appspot.com',
+  messagingSenderId: '274626777839',
+  appId: '1:274626777839:web:7a0c447edb47a56abb411a',
+  measurementId: 'G-L73L8DSN5R',
 };
 
 firebase.initializeApp(config);
 
-export const createUserProfileDocument = async ({ userAuth, additionalData }:
-  { userAuth: firebase.User; additionalData: Record<string, unknown> | null }):
-  Promise<firebase.firestore.DocumentReference<firebase.firestore.DocumentData> | null> => {
+export const createUserProfileDocument = async ({
+  userAuth,
+  additionalData,
+}: {
+  userAuth: firebase.User;
+  additionalData: Record<string, unknown> | null;
+}): Promise<firebase.firestore.DocumentReference<firebase.firestore.DocumentData> | null> => {
   if (!userAuth) return null;
 
   const userRef = firestore.doc(`users/${userAuth.uid}`);
@@ -32,7 +36,7 @@ export const createUserProfileDocument = async ({ userAuth, additionalData }:
         displayName,
         email,
         createdAt,
-        ...additionalData
+        ...additionalData,
       });
     } catch (error) {
       console.error('error creating user', error.message);
