@@ -104,7 +104,7 @@ class EncodingPage extends BaseComponent<Props, State> {
           const line = text.substring(p1, p2);
 
           if (line.startsWith('  ')) {
-            ta.value = text.substring(0, p1) + text.substring(p1 + 2, text.length);;
+            ta.value = text.substring(0, p1) + text.substring(p1 + 2, text.length);
             ta.selectionStart = s1 > 1 ? s1 - 2 : 0;
             ta.selectionEnd = ta.selectionStart;
           }
@@ -219,9 +219,9 @@ class EncodingPage extends BaseComponent<Props, State> {
           a format that can be transmitted safely over the internet. The two most frequently used applications are encoding charaters in a URL, and data for
           application/x-www-form-urlencoded media type, often used for submitting form data on web pages.
           </p>
-          <p>Per <a href="https://tools.ietf.org/html/rfc3986">RFC 3986</a>, the list of reserved characters for Percent-encoding are: ! * ' ( ) ; : @ & = + $ , / ? # [ ].</p>
+          <p>Per <a href="https://tools.ietf.org/html/rfc3986">RFC 3986</a>, the list of reserved characters for Percent-encoding are: ! * &apos; ( ) ; : @ & = + $ , / ? # [ ].</p>
           <p>The reserved character is encoded by concatenating the % sign with the corresponding byte value of the character in hex.</p>
-          <p>In JavaScript code the built-in functions encodeURIComponent and decodeURIComponent are used to perform URL encoding/decoding. In fact that's basically the code behind the URL encoding/decoding feature of this page.</p>
+          <p>In JavaScript code the built-in functions encodeURIComponent and decodeURIComponent are used to perform URL encoding/decoding. In fact that&apos;s basically the code behind the URL encoding/decoding feature of this page.</p>
           <h3>About HTML Entity Encoding</h3>
           <p>HTML Entity Encoding encodes reserved HTML characters so that the data can be safely embedded in HTML. A character Entity
           looks like this: [&entity_name;] OR [&#entity_number;]. For example, to include the &lt; sign in HTML we must write

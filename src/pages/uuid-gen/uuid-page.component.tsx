@@ -80,7 +80,7 @@ class UuidGen extends React.Component<Props, State> {
         <div className="output">
           <ul><code>{uuids}</code></ul>
           <div className="info">
-            <p>We've created a standard v4 UUID and a short UUID for you.</p>
+            <p>We&apos;ve created a standard v4 UUID and a short UUID for you.</p>
             <p>
               Click on the UUID button to generate an <a href="http://www.ietf.org/rfc/rfc4122.txt">RFC4122</a> UUID.
                 This generator uses the <a href="https://www.npmjs.com/package/uuid">uuid</a> npm package behind the scene. 

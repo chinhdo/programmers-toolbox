@@ -22,7 +22,7 @@ class HomePage extends Component<Props, State> {
   render(): React.ReactNode {
     return (
       <div className="HomePage">
-        <h1>Programmers' Toolbox</h1>
+        <h1>Programmers&apos; Toolbox</h1>
         <h2>by <a href="https://twitter.com/chinhdo">Chinh Do</a></h2>
         <p>
           Hello fellow programmer (or non-programmer <span role="img" aria-label="smiley face">😄</span> - we all need to generate a GUID from time to time - no judging here)!

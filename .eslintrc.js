@@ -1,6 +1,13 @@
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 2020,
+    sourceType: "module",
+    ecmaFeatures: {
+      jsx: true
+    }
+  },
   plugins: [
     '@typescript-eslint',
   ],
@@ -10,6 +17,7 @@ module.exports = {
     'plugin:react/recommended'
   ],
   env: {
-    'browser': true
+    'browser': true,
+    'jest': true
   }
 };
