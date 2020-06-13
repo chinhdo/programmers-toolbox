@@ -37,6 +37,7 @@ class HomePage extends Component<Props, State> {
           <li>Generate a <Link to="/uuid">UUID or GUID</Link></li>
           <li><Link to="/encode">URL/HTML/Base64 Encode/Decode</Link></li>
           <li><Link to="/hash">MD5/SHA-256 generator</Link></li>
+          <li><Link to="/lorem-ipsum">Lorem Ipsum generator</Link></li>
         </ul>
         <h2>Feature Roadmap</h2>
         <p>Features to be implemented in the next month or so.</p>
