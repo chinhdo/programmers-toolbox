@@ -73,14 +73,14 @@ class CryptoPage extends BaseComponent<Props, State> {
 
       if (ta.selectionStart === ta.selectionEnd) {
         if (e.shiftKey) {
-          let p1 = s1 === 0 ? 0 : Math.max(text.lastIndexOf('\n', s1 - 1) + 1, 0); // Start of current line
+          const p1 = s1 === 0 ? 0 : Math.max(text.lastIndexOf('\n', s1 - 1) + 1, 0); // Start of current line
           let p2 = text.indexOf('\n', p1 + 1); // End of current line
           p2 = p2 === -1 ? text.length : p2;
 
           const line = text.substring(p1, p2);
 
           if (line.startsWith('  ')) {
-            ta.value = text.substring(0, p1) + text.substring(p1 + 2, text.length);;
+            ta.value = text.substring(0, p1) + text.substring(p1 + 2, text.length);
             ta.selectionStart = s1 > 1 ? s1 - 2 : 0;
             ta.selectionEnd = ta.selectionStart;
           }
@@ -90,7 +90,7 @@ class CryptoPage extends BaseComponent<Props, State> {
           document.execCommand('insertText', false, '  ');
         }
       } else { // text selected
-        let p1 = s1 === 0 ? 0 : Math.max(text.lastIndexOf('\n', s1 - 1) + 1, 0); // Start of current line
+        const p1 = s1 === 0 ? 0 : Math.max(text.lastIndexOf('\n', s1 - 1) + 1, 0); // Start of current line
         let p2 = text.indexOf('\n', s2);
         p2 = p2 === -1 ? text.length : p2;
         if (e.shiftKey) {
@@ -182,7 +182,7 @@ class CryptoPage extends BaseComponent<Props, State> {
           <h3>About SHA-256 Hashes</h3>
           <p>SHA-256 is one of the strongest hashing algorithms available. It encodes texts of any length into a string of 256 bits.</p>
           <h3>About MD5 Hashes</h3>
-          <p>The MD5 hash algorithm takes a string of any length and encode it into a 128-bit fingerprint. It's widely used but 
+          <p>The MD5 hash algorithm takes a string of any length and encode it into a 128-bit fingerprint. It&apos;s widely used but 
             has been found to suffer from vulnerabilities.</p>
         </div>
       </div>

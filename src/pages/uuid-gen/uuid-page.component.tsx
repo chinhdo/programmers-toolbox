@@ -73,7 +73,7 @@ class UuidGen extends React.Component<Props, State> {
 
     return (
       <div className="UuidGen">
-        <h1>Generate UUID/GUID</h1>
+        <h1>Generate UUID/GUID / Short UUID</h1>
         <button className="btn btn-outline-primary" onClick={this.uuid} title="Generate a UUID/GUID">UUID</button>
         <button className="btn btn-outline-primary" onClick={this.short} title="Generate a short UUID">Short</button>
         <button className="btn btn-outline-secondary" onClick={this.clear}>Clear</button>

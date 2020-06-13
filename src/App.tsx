@@ -120,7 +120,7 @@ class App extends Component<Props, State> {
             <header>
               <div className="three-bars" onClick={() => this.toggleMenu()}>
                 <i className="fas fa-bars"></i>
-                Programmers' Toolbox by CD
+                Programmers&apos; Toolbox by CD
               </div>
             </header>
             <Switch>

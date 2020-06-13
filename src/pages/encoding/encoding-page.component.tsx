@@ -178,7 +178,7 @@ class EncodingPage extends BaseComponent<Props, State> {
 
     return (
       <div className="EncodingPage">
-        <h1>Encode</h1>
+        <h1>HTML Encoder/Decoder, URL Encoder/Decoder & Base64 Encoder</h1>
         <div>
           <label htmlFor="urlOption">
             <input type="radio" name="encodeType" id="urlOption" value="url"

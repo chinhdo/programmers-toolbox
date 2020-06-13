@@ -15,8 +15,8 @@ const config = {
 
 firebase.initializeApp(config);
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const createUserProfileDocument = async ({ userAuth, additionalData }: { userAuth: any; additionalData: any; }):
+export const createUserProfileDocument = async ({ userAuth, additionalData }:
+  { userAuth: firebase.User; additionalData: Record<string, unknown> | null }):
   Promise<firebase.firestore.DocumentReference<firebase.firestore.DocumentData> | null> => {
   if (!userAuth) return null;
 
@@ -47,6 +47,6 @@ export const firestore = firebase.firestore();
 
 const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({ prompt: 'select_account' });
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
+export const signInWithGoogle = (): Promise<firebase.auth.UserCredential> => auth.signInWithPopup(provider);
 
 export default firebase;
