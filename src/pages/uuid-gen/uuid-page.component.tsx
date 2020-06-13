@@ -4,18 +4,18 @@ import short from 'short-uuid';
 import './uuid-page.styles.scss'
 import CopyToClipboard from 'react-copy-to-clipboard';
 
-interface IProps {
+type Props = {
 
 }
 
-interface IState {
+type State = {
   showCopy: boolean;
   uuids: string[];
   copyIdx: number;
 }
 
-class UuidGen extends React.Component<IProps, IState> {
-  constructor(props: IProps) {
+class UuidGen extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     if (!this.state) {
       this.state = {
@@ -30,34 +30,34 @@ class UuidGen extends React.Component<IProps, IState> {
     this.short = this.short.bind(this);
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     this.uuid();
     this.short();
   }
 
-  copy(idx: number) {
+  copy(idx: number): void {
     this.setState({copyIdx: idx});
   }
 
-  clear() {
+  clear(): void {
     this.setState({ uuids: [] })
   }
 
 
-  short() {
+  short(): void {
     const uuids = this.state.uuids;
     const translator = short();
     uuids.push(translator.new());
     this.setState({ uuids: uuids });
   }
 
-  uuid() {
+  uuid(): void {
     const uuids = this.state.uuids;
     uuids.push(uuidv4());
     this.setState({ uuids: uuids });
   }
 
-  render() {
+  render(): React.ReactNode {
     const uuids = [];
     for (let i = 0; i < this.state.uuids.length; i++) {
       uuids.push(

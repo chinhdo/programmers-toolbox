@@ -38,21 +38,20 @@ class App extends Component<Props, State> {
   componentDidMount():void {
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth, null);
+        const userRef = await createUserProfileDocument({ userAuth, additionalData: null });
 
-        // TODO: Fix this
-        userRef?.onSnapshot(snapShot => {
-          console.log('TODO', snapShot);
-          // this.setState({
-          //   currentUser: {
-          //     id: snapShot.id,
-          //     ...snapShot.data()
-          //   }
-          // });
+        // TODO
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        userRef?.onSnapshot((snapShot: any) => {
+          this.setState({
+            currentUser: {
+              id: snapShot.id,
+              ...snapShot.data()
+            }
+          });
         });
       }
 
-      console.log('User', userAuth); // TODO remove
       this.setState({ currentUser: userAuth });
     });
   }
@@ -68,7 +67,6 @@ class App extends Component<Props, State> {
   }
 
   logOut(): void {
-    console.log('Logging out.');
     auth.signOut();
   }
 

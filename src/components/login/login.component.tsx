@@ -29,9 +29,7 @@ class Login extends React.Component<Props, State> {
   }
 
   login(): void {
-    signInWithGoogle().then( (result) => {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      console.log(result); // TODO
+    signInWithGoogle().then( () => {
       this.setState({ redirectToProfile: true });
     }).catch(function (error) {
       console.error(error);

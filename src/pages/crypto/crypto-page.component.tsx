@@ -4,20 +4,22 @@ import sha256 from 'crypto-js/sha256';
 import md5 from 'crypto-js/md5';
 import './crypto-page.styles.scss';
 
-interface IProps { }
+type Props = {
+
+ }
 
 enum HashType {
   md5 = "md5", sha256 = "sha256"
 }
 
-interface IState {
+type State = {
   hashType: HashType;
   input: string;
   output: string;
 }
 
-class CryptoPage extends BaseComponent<IProps, IState> {
-  constructor(props: IProps) {
+class CryptoPage extends BaseComponent<Props, State> {
+  constructor(props: Props) {
     super('CryptoPage', props);
 
     if (!this.state) {
@@ -35,14 +37,15 @@ class CryptoPage extends BaseComponent<IProps, IState> {
     this.saveStateToLocalStorage = this.saveStateToLocalStorage.bind(this);
   }
 
-  hash() {
-    let hashed: string = '';
+  hash(): void {
+    let hashed = '';
     switch (this.state.hashType) {
       case HashType.sha256:
-        const nonce = '';
-        const digest = sha256(nonce + this.state.input);
-        hashed = digest.toString();
-        break;
+        {
+          const digest = sha256(this.state.input);
+          hashed = digest.toString();
+          break;
+        }
       case HashType.md5:
         hashed = md5(this.state.input).toString();
         break;
@@ -55,7 +58,7 @@ class CryptoPage extends BaseComponent<IProps, IState> {
   }
 
   // TODO: extract this code into a reusable textarea component
-  keydown(e: KeyboardEvent<HTMLTextAreaElement>) {
+  keydown(e: KeyboardEvent<HTMLTextAreaElement>): void {
     if (e.key === 'z') {
       e.preventDefault();
     }
@@ -131,16 +134,16 @@ class CryptoPage extends BaseComponent<IProps, IState> {
     }
   }
 
-  inputChanged(e: ChangeEvent<HTMLTextAreaElement>) {
+  inputChanged(e: ChangeEvent<HTMLTextAreaElement>): void {
     this.setState({ input: e.target.value }, this.hash);
   }
 
-  radioChanged(e: ChangeEvent<HTMLInputElement>) {
+  radioChanged(e: ChangeEvent<HTMLInputElement>): void {
     const value: string = (e.target as HTMLInputElement).value;
     this.setState({ hashType: HashType[value as keyof typeof HashType] })
   }
 
-  render() {
+  render(): React.ReactNode {
     this.saveStateToLocalStorage();
 
     return (

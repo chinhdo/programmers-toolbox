@@ -6,20 +6,22 @@ import './encoding-page.styles.scss';
 
 // TODO: Save form state (with Redux?)
 
-interface IProps { }
+type Props = {
+
+ }
 
 enum EncodeType {
   url = "url", html = "html", base64 = "base64"
 }
 
-interface IState {
+type State = {
   encodeType: EncodeType;
   input: string;
   output: string;
 }
 
-class EncodingPage extends BaseComponent<IProps, IState> {
-  constructor(props: IProps) {
+class EncodingPage extends BaseComponent<Props, State> {
+  constructor(props: Props) {
     super('EncodingPage', props);
 
     if (!this.state) {
@@ -39,7 +41,7 @@ class EncodingPage extends BaseComponent<IProps, IState> {
     this.saveStateToLocalStorage = this.saveStateToLocalStorage.bind(this);
   }
 
-  decode() {
+  decode(): void {
     let decoded: string;
     switch (this.state.encodeType) {
       case EncodeType.url:
@@ -59,7 +61,7 @@ class EncodingPage extends BaseComponent<IProps, IState> {
     this.setState({ input: decoded });
   }
 
-  encode() {
+  encode(): void {
     let encoded: string;
     switch (this.state.encodeType) {
       case EncodeType.url:
@@ -80,7 +82,7 @@ class EncodingPage extends BaseComponent<IProps, IState> {
   }
 
   // TODO: extract this code into a reusable textarea component
-  keydown(e: KeyboardEvent<HTMLTextAreaElement>) {
+  keydown(e: KeyboardEvent<HTMLTextAreaElement>): void {
     if (e.key === 'z') {
       e.preventDefault();
     }
@@ -95,7 +97,7 @@ class EncodingPage extends BaseComponent<IProps, IState> {
 
       if (ta.selectionStart === ta.selectionEnd) {
         if (e.shiftKey) {
-          let p1 = s1 === 0 ? 0 : Math.max(text.lastIndexOf('\n', s1 - 1) + 1, 0); // Start of current line
+          const p1 = s1 === 0 ? 0 : Math.max(text.lastIndexOf('\n', s1 - 1) + 1, 0); // Start of current line
           let p2 = text.indexOf('\n', p1 + 1); // End of current line
           p2 = p2 === -1 ? text.length : p2;
 
@@ -112,7 +114,7 @@ class EncodingPage extends BaseComponent<IProps, IState> {
           document.execCommand('insertText', false, '  ');
         }
       } else { // text selected
-        let p1 = s1 === 0 ? 0 : Math.max(text.lastIndexOf('\n', s1 - 1) + 1, 0); // Start of current line
+        const p1 = s1 === 0 ? 0 : Math.max(text.lastIndexOf('\n', s1 - 1) + 1, 0); // Start of current line
         let p2 = text.indexOf('\n', s2);
         p2 = p2 === -1 ? text.length : p2;
         if (e.shiftKey) {
@@ -158,21 +160,20 @@ class EncodingPage extends BaseComponent<IProps, IState> {
     }
   }
 
-  inputChanged(e: ChangeEvent<HTMLTextAreaElement>) {
-    console.log("input changed");
+  inputChanged(e: ChangeEvent<HTMLTextAreaElement>): void {
     this.setState({ input: e.target.value }, this.encode);
   }
 
-  outputChanged(e: ChangeEvent<HTMLTextAreaElement>) {
+  outputChanged(e: ChangeEvent<HTMLTextAreaElement>): void {
     this.setState({ output: e.target.value }, this.decode);
   }
 
-  radioChanged(e: ChangeEvent<HTMLInputElement>) {
+  radioChanged(e: ChangeEvent<HTMLInputElement>): void {
     const value: string = (e.target as HTMLInputElement).value;
     this.setState({ encodeType: EncodeType[value as keyof typeof EncodeType] }, this.encode)    
   }
 
-  render() {
+  render(): React.ReactNode {
     this.saveStateToLocalStorage();
 
     return (

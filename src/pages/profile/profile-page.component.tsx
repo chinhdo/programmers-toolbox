@@ -1,20 +1,22 @@
 import React from 'react';
 import './profile-page.styles.scss';
 
-interface IProps {
-  currentUser: any
+type Props = {
+  currentUser: firebase.User | null;
 }
 
-interface IState {}
+type State = {
 
-class ProfilePage extends React.Component<IProps, IState> {
-  constructor(props: IProps) {
+}
+
+class ProfilePage extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {
     }
   }
 
-  render() {
+  render(): React.ReactNode {
     return (
       <div className="login-and-sign-up">
         <h1>Profile</h1>

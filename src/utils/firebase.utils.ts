@@ -15,9 +15,10 @@ const config = {
 
 firebase.initializeApp(config);
 
-// TODO any
-export const createUserProfileDocument = async (userAuth: any, additionalData: any) => {
-  if (!userAuth) return;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const createUserProfileDocument = async ({ userAuth, additionalData }: { userAuth: any; additionalData: any; }):
+  Promise<firebase.firestore.DocumentReference<firebase.firestore.DocumentData> | null> => {
+  if (!userAuth) return null;
 
   const userRef = firestore.doc(`users/${userAuth.uid}`);
 
@@ -34,7 +35,7 @@ export const createUserProfileDocument = async (userAuth: any, additionalData: a
         ...additionalData
       });
     } catch (error) {
-      console.log('error creating user', error.message);
+      console.error('error creating user', error.message);
     }
   }
 
