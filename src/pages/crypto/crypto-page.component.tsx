@@ -176,7 +176,7 @@ class CryptoPage extends BaseComponent<Props, State> {
         </div>
         {/* OUTPUT */}
         <div className="output">
-          <textarea spellCheck="false" value={this.state.output}></textarea>
+          <textarea spellCheck="false" value={this.state.output} readOnly></textarea>
         </div>
         <div className="about">
           <h3>About SHA-256 Hashes</h3>

@@ -16,6 +16,11 @@
       "status": 200
     },
     {
+      "route": "/lorem-ipsum",
+      "serve": "/index.html",
+      "status": 200
+    },
+    {
       "route": "/hash",
       "serve": "/index.html",
       "status": 200

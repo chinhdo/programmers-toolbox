@@ -1,0 +1,22 @@
+.LoremPage {
+  .lorem {
+    margin: 25px 0px;
+  }
+
+  input, button {
+    margin-right: 10px
+  }
+
+  input[type=number] {
+    width: 4rem;
+  }
+
+  input[type=radio] {
+    margin: 0px 5px 0px 0px;
+  }
+
+  label {
+    margin-right: 10px
+  }
+
+}

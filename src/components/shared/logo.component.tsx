@@ -35,7 +35,7 @@ class Logo extends React.Component<Props, State> {
 
   render(): React.ReactNode {
     return (
-      <div className="LogoComp">
+      <div className="LogoComp" title="Programmer's Toolbox by Chinh Do">
         <svg id="logo" version="1.1" viewBox="-5 -5 297 275">
           <g className="bottom">
             <path id="logo-bottom" fill="red" d="M248.6,102.82c-25.34-43.23-51.1-58.49-105.38-57.54c-57.4-0.04-111.07,31.6-121.2,100.47
