@@ -53,7 +53,7 @@ class HomePage extends Component<Props, State> {
         <ul>
           <li>CSS color mixer</li>
           <li>Test data generator</li>
-          <li>Formatters (compact JSON)</li>
+          <li>Formatters (compact JSON, sort JSON)</li>
           <li>HTML page template</li>
           <li>Light mode</li>
           <ul>
