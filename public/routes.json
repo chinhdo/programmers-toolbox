@@ -6,6 +6,11 @@
       "status": 200
     },
     {
+      "route": "/css-color-mixer",
+      "serve": "/index.html",
+      "status": 200
+    },
+    {
       "route": "/encode",
       "serve": "/index.html",
       "status": 200
