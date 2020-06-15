@@ -11,6 +11,7 @@ import ProfilePage from './pages/profile/profile-page.component';
 import './App.scss';
 import Logo from './components/shared/logo.component';
 import LoremPage from './pages/lorem/lorem-page.component';
+import ColorMixerPage from './pages/color-mixer/color-mixer.component';
 
 type Props = Record<string, unknown>;
 
@@ -115,16 +116,11 @@ class App extends Component<Props, State> {
                 </Link>
               </li>
               <li>
-                <Link to="/format">
-                  <i className="fas fa-pencil-alt fa-fw"></i>Format
+                <Link to="/css-color-mixer">
+                  <i className="fas fa-file-alt fa-fw"></i>CSS Color Mixer
                 </Link>
               </li>
-              <li>
-                <Link to="/testdata">
-                  <i className="fas fa-table fa-fw"></i>Test Data
-                </Link>
-              </li>
-
+              <hr />
               {this.state.currentUser ? (
                 <div>
                   <li>
@@ -148,11 +144,6 @@ class App extends Component<Props, State> {
                   </li>
                 </div>
               )}
-              <li>
-                <Link to="/faq">
-                  <i className="fas fa-question fa-fw"></i>FAQ
-                </Link>
-              </li>
             </ul>
           </nav>
 
@@ -175,6 +166,9 @@ class App extends Component<Props, State> {
               </Route>
               <Route path="/lorem-ipsum">
                 <LoremPage />
+              </Route>
+              <Route path="/css-color-mixer">
+                <ColorMixerPage />
               </Route>
               <Route path="/login">
                 <LoginAndSignUpPage />

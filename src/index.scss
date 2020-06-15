@@ -158,7 +158,7 @@ div button:not(:first-of-type) {
 
 header i {
   font-size: 1.25rem;
-  padding-right: 0.75rem
+  padding: 0px 10px 10px 0px;
 }
 
 .three-bars {
@@ -166,5 +166,7 @@ header i {
 }
 
 @media (max-width: 768px) {
-  .three-bars {display: inline}
+  .three-bars {
+    display: inline;
+  }
 }
