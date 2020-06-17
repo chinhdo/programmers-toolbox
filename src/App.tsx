@@ -13,6 +13,8 @@ import Logo from './components/shared/logo.component';
 import LoremPage from './pages/lorem/lorem-page.component';
 import ColorMixerPage from './pages/color-mixer/color-mixer.component';
 
+// TODO: Font-awsome icon for color mixer
+
 type Props = Record<string, unknown>;
 
 type State = {

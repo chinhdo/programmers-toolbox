@@ -62,8 +62,16 @@ class ColorMixerPage extends React.Component<Props, State> {
   }
 
   mapHue(e: React.MouseEvent<HTMLDivElement, MouseEvent>): void {
-    const y = e.clientY + 5 + (this.hueRef.current?.clientTop ? this.hueRef.current?.offsetTop : 0);
-    this.setState({ debug: e.clientY.toString(), huePointerY: y });
+    if (this.hueRef.current) {
+      let y = e.clientY + 5;
+      if (y < this.hueRef.current.offsetTop + 5) {
+        y = this.hueRef.current.offsetTop + 5;
+      } else if (y > this.hueRef.current.offsetTop + this.hueRef.current.offsetHeight) {
+        y = this.hueRef.current.offsetTop + this.hueRef.current.offsetHeight;
+      }
+
+      this.setState({ debug: e.clientY.toString(), huePointerY: y });
+    }
   }
 
   // TODO mobile touch handling
