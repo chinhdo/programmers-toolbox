@@ -47,15 +47,20 @@ class HomePage extends Component<Props, State> {
           <li>
             <Link to="/lorem-ipsum">Lorem Ipsum generator</Link>
           </li>
+          <li>
+            <Link to="/css-color-mixer">HTML/CSS Color Mixer</Link>
+          </li>
         </ul>
         <h2>Feature Roadmap</h2>
         <p>Potential features to be implemented in the next month or so.</p>
         <ul>
           <li>CSS color mixer</li>
-          <li>Test data generator</li>
           <li>Formatters (compact JSON)</li>
-          <li>HTML page template</li>
+          <li>HTML page template?</li>
           <li>Light mode</li>
+          <li>
+            Anything other tools you would like to suggest? Just <a href="https://twitter.com/chinhdo">let me know</a>.
+          </li>
           <ul>
             <li>Create account to save settings</li>
             <li>Social login with Google or Facebook</li>
