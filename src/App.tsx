@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
-import UuidGen from './pages/uuid-gen/uuid-page.component';
+import UuidPage from './pages/uuid-gen/uuid-page.component';
 import { Footer } from './components/shared/footer.component';
 import HomePage from './pages/home/homepage.component';
 import EncodingPage from './pages/encoding/encoding-page.component';
@@ -12,6 +12,7 @@ import './App.scss';
 import Logo from './components/shared/logo.component';
 import LoremPage from './pages/lorem/lorem-page.component';
 import ColorMixerPage from './pages/color-mixer/color-mixer.component';
+import CssTracerPage from './pages/css-tracer/css-tracer.component';
 
 // TODO: Font-awsome icon for color mixer
 
@@ -119,7 +120,12 @@ class App extends Component<Props, State> {
               </li>
               <li>
                 <Link to="/css-color-mixer">
-                  <i className="fas fa-file-alt fa-fw"></i>CSS Color Mixer
+                  <i className="fas fa-palette"></i>CSS Color Mixer
+                </Link>
+              </li>
+              <li>
+                <Link to="/css-art-tracer">
+                  <i className="fas fa-palette"></i>CSS Art Tracer
                 </Link>
               </li>
               <hr />
@@ -158,7 +164,7 @@ class App extends Component<Props, State> {
             </header>
             <Switch>
               <Route path="/uuid">
-                <UuidGen />
+                <UuidPage />
               </Route>
               <Route path="/encode">
                 <EncodingPage />
@@ -171,6 +177,9 @@ class App extends Component<Props, State> {
               </Route>
               <Route path="/css-color-mixer">
                 <ColorMixerPage />
+              </Route>
+              <Route path="/css-art-tracer">
+                <CssTracerPage />
               </Route>
               <Route path="/login">
                 <LoginAndSignUpPage />

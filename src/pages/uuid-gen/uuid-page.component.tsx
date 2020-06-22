@@ -12,7 +12,8 @@ type State = {
   copyIdx: number;
 };
 
-class UuidGen extends React.Component<Props, State> {
+/** Page to generate UUID's/GUID's and short UUIDs */
+class UuidPage extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     if (!this.state) {
@@ -104,4 +105,4 @@ class UuidGen extends React.Component<Props, State> {
   }
 }
 
-export default UuidGen;
+export default UuidPage;
