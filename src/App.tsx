@@ -4,17 +4,11 @@ import UuidPage from './pages/uuid-gen/uuid-page.component';
 import { Footer } from './components/shared/footer.component';
 import HomePage from './pages/home/homepage.component';
 import EncodingPage from './pages/encoding/encoding-page.component';
-import LoginAndSignUpPage from './pages/login-and-sign-up/login-and-sign-up.component';
 import { createUserProfileDocument, auth } from './utils/firebase.utils';
 import CryptoPage from './pages/crypto/crypto-page.component';
-import ProfilePage from './pages/profile/profile-page.component';
 import './App.scss';
 import Logo from './components/shared/logo.component';
 import LoremPage from './pages/lorem/lorem-page.component';
-import ColorMixerPage from './pages/color-mixer/color-mixer.component';
-import CssTracerPage from './pages/css-tracer/css-tracer.component';
-
-// TODO: Font-awsome icon for color mixer
 
 type Props = Record<string, unknown>;
 
