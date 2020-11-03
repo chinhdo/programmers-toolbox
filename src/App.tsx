@@ -118,40 +118,6 @@ class App extends Component<Props, State> {
                   <i className="fas fa-file-alt fa-fw"></i>Lorem Ipsum
                 </Link>
               </li>
-              <li>
-                <Link to="/css-color-mixer">
-                  <i className="fas fa-palette"></i>CSS Color Mixer
-                </Link>
-              </li>
-              <li>
-                <Link to="/css-art-tracer">
-                  <i className="fas fa-palette"></i>CSS Art Tracer
-                </Link>
-              </li>
-              <hr />
-              {this.state.currentUser ? (
-                <div>
-                  <li>
-                    <Link to="" onClick={() => this.logOut()}>
-                      <i className="fas fa-sign-out-alt fa-fw"></i>Logout
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/profile">
-                      <i className="fas fa-user-circle fa-fw"></i>
-                      {this.state.currentUser.displayName}
-                    </Link>
-                  </li>
-                </div>
-              ) : (
-                <div>
-                  <li>
-                    <Link to="/login">
-                      <i className="fas fa-sign-in-alt fa-fw"></i>Login
-                    </Link>
-                  </li>
-                </div>
-              )}
             </ul>
           </nav>
 
@@ -174,18 +140,6 @@ class App extends Component<Props, State> {
               </Route>
               <Route path="/lorem-ipsum">
                 <LoremPage />
-              </Route>
-              <Route path="/css-color-mixer">
-                <ColorMixerPage />
-              </Route>
-              <Route path="/css-art-tracer">
-                <CssTracerPage />
-              </Route>
-              <Route path="/login">
-                <LoginAndSignUpPage />
-              </Route>
-              <Route path="/profile">
-                <ProfilePage currentUser={this.state.currentUser} />
               </Route>
               <Route exact path="/">
                 <HomePage />
