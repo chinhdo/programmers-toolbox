@@ -4,7 +4,6 @@ import UuidPage from './pages/uuid-gen/uuid-page.component';
 import { Footer } from './components/shared/footer.component';
 import HomePage from './pages/home/homepage.component';
 import EncodingPage from './pages/encoding/encoding-page.component';
-import { createUserProfileDocument, auth } from './utils/firebase.utils';
 import CryptoPage from './pages/crypto/crypto-page.component';
 import './App.scss';
 import Logo from './components/shared/logo.component';
@@ -13,16 +12,16 @@ import LoremPage from './pages/lorem/lorem-page.component';
 type Props = Record<string, unknown>;
 
 type State = {
-  currentUser: firebase.User | null;
   responsiveMenuOn: boolean;
 };
 
 class App extends Component<Props, State> {
+  private baseDir = '/tools';
+
   constructor(props: Props) {
     super(props);
 
     this.state = {
-      currentUser: null,
       responsiveMenuOn: false,
     };
 
@@ -30,41 +29,8 @@ class App extends Component<Props, State> {
     this.toggleMenu = this.toggleMenu.bind(this);
   }
 
-  unsubscribeFromAuth: firebase.Unsubscribe | undefined;
-
-  componentDidMount(): void {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument({ userAuth, additionalData: null });
-
-        // TODO
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        userRef?.onSnapshot((snapShot: any) => {
-          this.setState({
-            currentUser: {
-              id: snapShot.id,
-              ...snapShot.data(),
-            },
-          });
-        });
-      }
-
-      this.setState({ currentUser: userAuth });
-    });
-  }
-
-  componentWillUnmount(): void {
-    if (this.unsubscribeFromAuth) {
-      this.unsubscribeFromAuth();
-    }
-  }
-
   getClassName(): string {
     return this.state.responsiveMenuOn ? 'on' : 'off';
-  }
-
-  logOut(): void {
-    auth.signOut();
   }
 
   onMouseUp(): void {
@@ -87,28 +53,28 @@ class App extends Component<Props, State> {
               <i className="fas fa-bars"></i>
             </div>
             <div className="logo">
-              <Link className="logo" to="/">
+              <Link className="logo" to={`${this.baseDir}`}>
                 <Logo />
               </Link>
             </div>
             <ul className="list-unstyled components">
               <li>
-                <Link to="/uuid">
+                <Link to={`${this.baseDir}/guid-generator`}>
                   <i className="fas fa-fingerprint fa-fw"></i>UUID/GUID
                 </Link>
               </li>
               <li>
-                <Link to="/encode">
+                <Link to={`${this.baseDir}/url-encoder`}>
                   <i className="far fa-file-code fa-fw"></i>Encode/Decode
                 </Link>
               </li>
               <li>
-                <Link to="/hash">
+                <Link to={`${this.baseDir}/md5-hash-generator`}>
                   <i className="fas fa-hashtag fa-fw"></i>Hashes
                 </Link>
               </li>
               <li>
-                <Link to="/lorem-ipsum">
+                <Link to={`${this.baseDir}/lorem-ipsum-generator`}>
                   <i className="fas fa-file-alt fa-fw"></i>Lorem Ipsum
                 </Link>
               </li>
@@ -123,19 +89,19 @@ class App extends Component<Props, State> {
               </div>
             </header>
             <Switch>
-              <Route path="/uuid">
+              <Route path={`${this.baseDir}/guid-generator`}>
                 <UuidPage />
               </Route>
-              <Route path="/encode">
+              <Route path={`${this.baseDir}/url-encoder`}>
                 <EncodingPage />
               </Route>
-              <Route path="/hash">
+              <Route path={`${this.baseDir}/md5-hash-generator`}>
                 <CryptoPage />
               </Route>
-              <Route path="/lorem-ipsum">
+              <Route path={`${this.baseDir}/lorem-ipsum-generator`}>
                 <LoremPage />
               </Route>
-              <Route exact path="/">
+              <Route exact path={`${this.baseDir}`}>
                 <HomePage />
               </Route>
             </Switch>
