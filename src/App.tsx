@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
-import UuidPage from './pages/uuid-gen/uuid-page.component';
+import { BrowserRouter, Route, Link, Switch, Redirect } from 'react-router-dom';
 import { Footer } from './components/shared/footer.component';
 import HomePage from './pages/home/homepage.component';
 import EncodingPage from './pages/encoding/encoding-page.component';
@@ -60,7 +59,7 @@ class App extends Component<Props, State> {
             <ul className="list-unstyled components">
               <li>
                 <Link to={`${this.baseDir}/guid-generator`}>
-                  <i className="fas fa-fingerprint fa-fw"></i>UUID/GUID
+                  <i className="fas fa-fingerprint fa-fw"></i>GUID/UUID
                 </Link>
               </li>
               <li>
@@ -83,14 +82,16 @@ class App extends Component<Props, State> {
 
           <div id="content">
             <header>
-              <div className="three-bars" onClick={() => this.toggleMenu()}>
+              <span className="three-bars" onClick={() => this.toggleMenu()}>
                 <i className="fas fa-bars"></i>
-                Programmers&apos; Toolbox by CD
-              </div>
+              </span>
+              <span className="title">
+                Programmers&apos; Toolbox by <a href="https://twitter.com/chinhdo">Chinh Do</a>
+              </span>
             </header>
             <Switch>
               <Route path={`${this.baseDir}/guid-generator`}>
-                <UuidPage />
+                <HomePage />
               </Route>
               <Route path={`${this.baseDir}/url-encoder`}>
                 <EncodingPage />
@@ -102,7 +103,10 @@ class App extends Component<Props, State> {
                 <LoremPage />
               </Route>
               <Route exact path={`${this.baseDir}`}>
-                <HomePage />
+                <Redirect to={`${this.baseDir}/guid-generator`} />
+              </Route>
+              <Route exact path="">
+                <Redirect to={`${this.baseDir}/guid-generator`} />
               </Route>
             </Switch>
             <Footer />

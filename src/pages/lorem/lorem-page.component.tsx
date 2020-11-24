@@ -75,7 +75,7 @@ class LoremPage extends React.Component<Props, State> {
       <div className="LoremPage">
         <h1>Generate Lorem Ipsum Placeholder Text</h1>
         <div className="buttons">
-          <button className="btn btn-outline-primary" onClick={this.generate} title="Generate">
+          <button className="btn btn-outline-primary btn-sm" onClick={this.generate} title="Generate">
             Generate
           </button>
           <input

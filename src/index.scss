@@ -10,7 +10,7 @@ body {
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: 1.8rem;
   padding: 0px 0px 10px 0px;
 }
 
@@ -159,14 +159,4 @@ div button:not(:first-of-type) {
 header i {
   font-size: 1.25rem;
   padding: 0px 10px 10px 0px;
-}
-
-.three-bars {
-  display: none
-}
-
-@media (max-width: 768px) {
-  .three-bars {
-    display: inline;
-  }
 }

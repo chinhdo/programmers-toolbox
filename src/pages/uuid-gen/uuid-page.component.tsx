@@ -74,13 +74,13 @@ class UuidPage extends React.Component<Props, State> {
     return (
       <div className="UuidGen">
         <h1>GUID Generator - UUID Generator</h1>
-        <button className="btn btn-outline-primary" onClick={this.uuid} title="Generate a UUID/GUID">
+        <button className="btn btn-outline-primary btn-sm" onClick={this.uuid} title="Generate a UUID/GUID">
           UUID
         </button>
-        <button className="btn btn-outline-primary" onClick={this.short} title="Generate a short UUID">
+        <button className="btn btn-outline-primary btn-sm" onClick={this.short} title="Generate a short UUID">
           Short
         </button>
-        <button className="btn btn-outline-secondary" onClick={this.clear}>
+        <button className="btn btn-outline-secondary btn-sm" onClick={this.clear}>
           Clear
         </button>
         <div className="output">

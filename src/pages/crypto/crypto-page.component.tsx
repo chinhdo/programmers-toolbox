@@ -184,7 +184,7 @@ class CryptoPage extends BaseComponent<Props, State> {
         </div>
         {/* Buttons */}
         <div className="buttons">
-          <button className="btn btn-outline-primary" title="Hash" onClick={this.hash}>
+          <button className="btn btn-outline-primary btn-sm" title="Hash" onClick={this.hash}>
             Hash <i className="fas fa-arrow-down"></i>
           </button>
         </div>

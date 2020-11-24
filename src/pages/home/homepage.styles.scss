@@ -1,13 +1,25 @@
 .HomePage {
-  h1 {
-    margin-bottom: 0;
-    padding-bottom: 5px;
-  }
-
-  h2 {
-    font-size: 1.15rem;
-    margin-bottom: 20px;
-  }
-
   #logo {margin-bottom: 30px;}
+
+  width: 100%;
+
+  /* GUID */
+
+  .output {
+    padding: 20px 5px;
+  }
+
+  .m-fadeOut {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 2000ms, opacity 2000ms;
+    padding-left: 5px;
+  }
+
+  .m-fadeIn {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s linear 0s, opacity 2000ms;
+    padding-left: 5px;
+  }
 }

@@ -9,8 +9,8 @@
 }
 
 #sidebar {
-  min-width: 250;
-  max-width: 250px;
+  min-width: 200px;
+  max-width: 200px;
   background:#1c2844;
   color: #fff;
   transition: all 0.3s;
@@ -125,6 +125,19 @@ hr {
   }
 }
 
+header {
+  vertical-align: middle;
+}
+
+.title {
+  padding-bottom: 10px;
+}
+
+.three-bars {
+  display: none;
+  padding-right: 5px;
+}
+
 @media (max-width: 768px) {
   #sidebar {
       display: none;
@@ -141,4 +154,9 @@ hr {
   .closeBtn {
     display: block;
   }
+
+  .three-bars {
+    display: inline;
+  }
 }
+

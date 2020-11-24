@@ -222,10 +222,10 @@ class EncodingPage extends BaseComponent<Props, State> {
           ></textarea>
         </div>
         <div className="buttons">
-          <button className="btn btn-outline-primary" title="Encode" onClick={this.encode}>
+          <button className="btn btn-outline-primary btn-sm" title="Encode" onClick={this.encode}>
             Encode <i className="fas fa-arrow-down"></i>
           </button>
-          <button className="btn btn-outline-secondary" title="Encode" onClick={this.decode}>
+          <button className="btn btn-outline-secondary btn-sm" title="Encode" onClick={this.decode}>
             Decode <i className="fas fa-arrow-up"></i>
           </button>
         </div>
