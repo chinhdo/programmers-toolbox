@@ -12,7 +12,6 @@ enum EncodeType {
 }
 
 type State = {
-  encodeType: EncodeType;
   input: string;
   output: string;
 };
@@ -25,7 +24,6 @@ class EncodingPage extends BaseComponent<Props, State> {
       this.state = {
         input: '',
         output: '',
-        encodeType: EncodeType.url,
       };
     }
 
@@ -34,13 +32,12 @@ class EncodingPage extends BaseComponent<Props, State> {
     this.encode = this.encode.bind(this);
     this.decode = this.decode.bind(this);
     this.keydown = this.keydown.bind(this);
-    this.radioChanged = this.radioChanged.bind(this);
     this.saveStateToLocalStorage = this.saveStateToLocalStorage.bind(this);
   }
 
-  decode(): void {
+  decode(type: EncodeType): void {
     let decoded: string;
-    switch (this.state.encodeType) {
+    switch (type) {
       case EncodeType.url:
         decoded = decodeURIComponent(this.state.output);
         break;
@@ -58,9 +55,9 @@ class EncodingPage extends BaseComponent<Props, State> {
     this.setState({ input: decoded });
   }
 
-  encode(): void {
+  encode(type: EncodeType): void {
     let encoded: string;
-    switch (this.state.encodeType) {
+    switch (type) {
       case EncodeType.url:
         encoded = encodeURIComponent(this.state.input);
         break;
@@ -153,69 +150,30 @@ class EncodingPage extends BaseComponent<Props, State> {
         }
       }
 
-      this.setState({ input: ta.value }, this.encode);
+      this.setState({ input: ta.value });
     }
   }
 
   inputChanged(e: ChangeEvent<HTMLTextAreaElement>): void {
-    this.setState({ input: e.target.value }, this.encode);
+    this.setState({ input: e.target.value });
   }
 
   outputChanged(e: ChangeEvent<HTMLTextAreaElement>): void {
-    this.setState({ output: e.target.value }, this.decode);
-  }
-
-  radioChanged(e: ChangeEvent<HTMLInputElement>): void {
-    const value: string = (e.target as HTMLInputElement).value;
-    this.setState({ encodeType: EncodeType[value as keyof typeof EncodeType] }, this.encode);
+    this.setState({ output: e.target.value });
   }
 
   render(): React.ReactNode {
     this.saveStateToLocalStorage();
 
     const pathName = window.location.pathname;
-    const name = pathName.endsWith('url-encoder') ? 'URL' : pathName.endsWith('base64-encoder') ? 'Base64' : 'HTML';
+    const name = pathName.includes('url') ? 'URL' : pathName.includes('base64') ? 'Base64' : 'HTML';
     document.title = name + ' Encoder/Decoder';
+    const type = name === 'URL' ? EncodeType.url : name === 'Base64' ? EncodeType.base64 : EncodeType.html;
 
     return (
       <div className="EncodingPage">
         <h1>{name} Encoder & Decoder</h1>
-        <div>
-          <label htmlFor="urlOption">
-            <input
-              type="radio"
-              name="encodeType"
-              id="urlOption"
-              value="url"
-              onChange={this.radioChanged}
-              checked={this.state.encodeType === EncodeType.url}
-            />
-            URL
-          </label>
-          <label htmlFor="htmlOption">
-            <input
-              type="radio"
-              name="encodeType"
-              id="htmlOption"
-              value="html"
-              onChange={this.radioChanged}
-              checked={this.state.encodeType === EncodeType.html}
-            />
-            HTML
-          </label>
-          <label htmlFor="base64Option">
-            <input
-              type="radio"
-              name="encodeType"
-              id="base64Option"
-              value="base64"
-              onChange={this.radioChanged}
-              checked={this.state.encodeType === EncodeType.base64}
-            />
-            Base64
-          </label>
-        </div>
-
+        <p>Input text and click encode or decode.</p>
         {/* INPUT */}
         <div className="input">
           <textarea
@@ -226,10 +184,10 @@ class EncodingPage extends BaseComponent<Props, State> {
           ></textarea>
         </div>
         <div className="buttons">
-          <button className="btn btn-outline-primary btn-sm" title="Encode" onClick={this.encode}>
+          <button className="btn btn-outline-primary btn-sm" title="Encode" onClick={() => this.encode(type)}>
             Encode <i className="fas fa-arrow-down"></i>
           </button>
-          <button className="btn btn-outline-secondary btn-sm" title="Encode" onClick={this.decode}>
+          <button className="btn btn-outline-secondary btn-sm" title="Encode" onClick={() => this.decode(type)}>
             Decode <i className="fas fa-arrow-up"></i>
           </button>
         </div>

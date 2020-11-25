@@ -77,7 +77,12 @@ class HomePage extends Component<Props, State> {
         <h1>{name} Generator</h1>
 
         <div className="UuidGen">
-          <button className="btn btn-outline-primary btn-sm" onClick={this.uuid} title="Generate a ${name}">
+          <p>
+            Generate <a href="http://www.ietf.org/rfc/rfc4122.txt">RFC4122</a> compliance {name}&apos;s and
+            short/compact {name}
+            &apos;s online.
+          </p>
+          <button className="btn btn-outline-primary btn-sm" onClick={this.uuid} title="Generate a {name}">
             {name}
           </button>
           <button className="btn btn-outline-primary btn-sm" onClick={this.short} title="Generate a short {name}">
@@ -92,10 +97,10 @@ class HomePage extends Component<Props, State> {
             </ul>
             <div className="info">
               <p>
-                This page generates <a href="http://www.ietf.org/rfc/rfc4122.txt">RFC4122</a> {name}&apos;s (also known
-                as UUID&apos;s). The <a href="https://www.npmjs.com/package/uuid">uuid</a> npm package is used behind
-                the scene. Version-4 {name}&apos;s are generated using a random or pseudo-random number. GUID&apos;s and
-                UUID&apos;s are the same things.
+                This page generates <a href="http://www.ietf.org/rfc/rfc4122.txt">RFC4122</a> {name}&apos;s. The{' '}
+                <a href="https://www.npmjs.com/package/uuid">uuid</a> npm package is used behind the scene. Version-4{' '}
+                {name}&apos;s are generated using a random or pseudo-random number. GUID&apos;s and UUID&apos;s are the
+                same things.
               </p>
               <p>
                 The &quot;Short&quot; button generates a shorter/compact format {name} (based on the{' '}

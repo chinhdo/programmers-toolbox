@@ -151,6 +151,7 @@ class CryptoPage extends BaseComponent<Props, State> {
     return (
       <div className="EncodingPage">
         <h1>{name} Hash Generator</h1>
+        <p>Input a text string and click hash to generate a {name} hash.</p>
         <div>
           <label htmlFor="sha256Option">
             <input
