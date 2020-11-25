@@ -36,10 +36,6 @@ class CryptoPage extends BaseComponent<Props, State> {
     this.saveStateToLocalStorage = this.saveStateToLocalStorage.bind(this);
   }
 
-  componentDidMount(): void {
-    document.title = 'MD5 and SHA-256 Hash Generator';
-  }
-
   hash(): void {
     let hashed = '';
     switch (this.state.hashType) {
@@ -146,12 +142,15 @@ class CryptoPage extends BaseComponent<Props, State> {
   }
 
   render(): React.ReactNode {
+    const pathName = window.location.pathname;
+    const name = pathName.includes('md5') ? 'MD5' : 'SHA-256';
+    document.title = name + ' Hash Generator';
+
     this.saveStateToLocalStorage();
 
     return (
       <div className="EncodingPage">
-        <h1>MD5 and SHA-256 Hash Generator</h1>
-        <p>MD5 hash generator. SHA-256 hash generator. Generate SHA 256, MD5 hashes online.</p>
+        <h1>{name} Hash Generator</h1>
         <div>
           <label htmlFor="sha256Option">
             <input
@@ -197,16 +196,24 @@ class CryptoPage extends BaseComponent<Props, State> {
           <textarea spellCheck="false" value={this.state.output} readOnly></textarea>
         </div>
         <div className="about">
-          <h3>About SHA-256 Hashes</h3>
-          <p>
-            SHA-256 is one of the strongest hashing algorithms available. It encodes texts of any length into a string
-            of 256 bits.
-          </p>
-          <h3>About MD5 Hashes</h3>
-          <p>
-            The MD5 hash algorithm takes a string of any length and encode it into a 128-bit fingerprint. It&apos;s
-            widely used but has been found to suffer from vulnerabilities.
-          </p>
+          {name === 'MD5' && (
+            <div>
+              <h3>About MD5 Hashes</h3>
+              <p>
+                The MD5 hash algorithm takes a string of any length and encode it into a 128-bit fingerprint. It&apos;s
+                widely used but has been found to suffer from vulnerabilities.
+              </p>
+            </div>
+          )}
+          {name === 'SHA-256' && (
+            <div>
+              <h3>About SHA-256 Hashes</h3>
+              <p>
+                SHA-256 is one of the strongest hashing algorithms available. It encodes texts of any length into a
+                string of 256 bits.
+              </p>
+            </div>
+          )}
         </div>
       </div>
     );

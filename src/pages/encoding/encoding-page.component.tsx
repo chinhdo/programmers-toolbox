@@ -38,10 +38,6 @@ class EncodingPage extends BaseComponent<Props, State> {
     this.saveStateToLocalStorage = this.saveStateToLocalStorage.bind(this);
   }
 
-  componentDidMount(): void {
-    document.title = 'HTML Encoder/Decoder, URL Encoder/Decoder & Base64 Encoder/Decoder';
-  }
-
   decode(): void {
     let decoded: string;
     switch (this.state.encodeType) {
@@ -177,9 +173,13 @@ class EncodingPage extends BaseComponent<Props, State> {
   render(): React.ReactNode {
     this.saveStateToLocalStorage();
 
+    const pathName = window.location.pathname;
+    const name = pathName.endsWith('url-encoder') ? 'URL' : pathName.endsWith('base64-encoder') ? 'Base64' : 'HTML';
+    document.title = name + ' Encoder/Decoder';
+
     return (
       <div className="EncodingPage">
-        <h1>HTML Encoder/Decoder, URL Encoder/Decoder & Base64 Encoder/Decoder</h1>
+        <h1>{name} Encoder & Decoder</h1>
         <div>
           <label htmlFor="urlOption">
             <input
@@ -242,37 +242,53 @@ class EncodingPage extends BaseComponent<Props, State> {
           ></textarea>
         </div>
         <div className="about">
-          <h3>About URL Encoding</h3>
-          <p>
-            URL encoding, also known as <a href="https://tools.ietf.org/html/rfc3986#section-2.1">Percent-encoding</a>,
-            converts characters into a format that can be transmitted safely over the internet. The two most frequently
-            used applications are encoding charaters in a URL, and data for application/x-www-form-urlencoded media
-            type, often used for submitting form data on web pages.
-          </p>
-          <p>
-            Per <a href="https://tools.ietf.org/html/rfc3986">RFC 3986</a>, the list of reserved characters for
-            Percent-encoding are: ! * &apos; ( ) ; : @ & = + $ , / ? # [ ].
-          </p>
-          <p>
-            The reserved character is encoded by concatenating the % sign with the corresponding byte value of the
-            character in hex.
-          </p>
-          <p>
-            In JavaScript code the built-in functions encodeURIComponent and decodeURIComponent are used to perform URL
-            encoding/decoding. In fact that&apos;s basically the code behind the URL encoding/decoding feature of this
-            page.
-          </p>
-          <h3>About HTML Entity Encoding</h3>
-          <p>
-            HTML Entity Encoding encodes reserved HTML characters so that the data can be safely embedded in HTML. A
-            character Entity looks like this: [&entity_name;] OR [&#entity_number;]. For example, to include the &lt;
-            sign in HTML we must write &amp;lt; or &amp;#60;
-          </p>
-          <h3>About Base64 Encoding</h3>
-          <p>
-            Base64 encoding represents binary data in ASCII string format by translating it into a radix-64
-            reprensentation. Base64 is designed to cary data safely in channels that only reliably support text content.
-          </p>
+          {name === 'URL' && (
+            <div>
+              <h3>About URL Encoding</h3>
+              <p>
+                URL encoding, also known as{' '}
+                <a href="https://tools.ietf.org/html/rfc3986#section-2.1">Percent-encoding</a>, converts characters into
+                a format that can be transmitted safely over the internet. The two most frequently used applications are
+                encoding charaters in a URL, and data for application/x-www-form-urlencoded media type, often used for
+                submitting form data on web pages.
+              </p>
+              <p>
+                Per <a href="https://tools.ietf.org/html/rfc3986">RFC 3986</a>, the list of reserved characters for
+                Percent-encoding are: ! * &apos; ( ) ; : @ & = + $ , / ? # [ ].
+              </p>
+              <p>
+                The reserved character is encoded by concatenating the % sign with the corresponding byte value of the
+                character in hex.
+              </p>
+              <p>
+                In JavaScript code the built-in functions encodeURIComponent and decodeURIComponent are used to perform
+                URL encoding/decoding. In fact that&apos;s basically the code behind the URL encoding/decoding feature
+                of this page.
+              </p>
+            </div>
+          )}
+
+          {name === 'HTML' && (
+            <div>
+              <h3>About HTML Entity Encoding</h3>
+              <p>
+                HTML Entity Encoding encodes reserved HTML characters so that the data can be safely embedded in HTML. A
+                character Entity looks like this: [&entity_name;] OR [&#entity_number;]. For example, to include the
+                &lt; sign in HTML we must write &amp;lt; or &amp;#60;
+              </p>
+            </div>
+          )}
+
+          {name === 'Base64' && (
+            <div>
+              <h3>About Base64 Encoding</h3>
+              <p>
+                Base64 encoding represents binary data in ASCII string format by translating it into a radix-64
+                reprensentation. Base64 is designed to cary data safely in channels that only reliably support text
+                content.
+              </p>
+            </div>
+          )}
         </div>
       </div>
     );

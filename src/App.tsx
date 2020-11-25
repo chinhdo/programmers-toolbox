@@ -59,22 +59,42 @@ class App extends Component<Props, State> {
             <ul className="list-unstyled components">
               <li>
                 <Link to={`${this.baseDir}/guid-generator`}>
-                  <i className="fas fa-fingerprint fa-fw"></i>GUID/UUID
+                  <i className="fas fa-fingerprint fa-fw"></i>GUID Generator
+                </Link>
+              </li>
+              <li>
+                <Link to={`${this.baseDir}/uuid-generator`}>
+                  <i className="fas fa-fingerprint fa-fw"></i>UUID Generator
                 </Link>
               </li>
               <li>
                 <Link to={`${this.baseDir}/url-encoder`}>
-                  <i className="far fa-file-code fa-fw"></i>Encode/Decode
+                  <i className="far fa-file-code fa-fw"></i>URL Encoder/Decoder
+                </Link>
+              </li>
+              <li>
+                <Link to={`${this.baseDir}/html-encoder`}>
+                  <i className="far fa-file-code fa-fw"></i>HTML Encoder/Decoder
+                </Link>
+              </li>
+              <li>
+                <Link to={`${this.baseDir}/base64-encoder`}>
+                  <i className="far fa-file-code fa-fw"></i>Base64 Encoder/Decoder
                 </Link>
               </li>
               <li>
                 <Link to={`${this.baseDir}/md5-hash-generator`}>
-                  <i className="fas fa-hashtag fa-fw"></i>Hashes
+                  <i className="fas fa-hashtag fa-fw"></i>MD5 Hash Generator
+                </Link>
+              </li>
+              <li>
+                <Link to={`${this.baseDir}/sha-256-hash-generator`}>
+                  <i className="fas fa-hashtag fa-fw"></i>SHA-256 Hash Generator
                 </Link>
               </li>
               <li>
                 <Link to={`${this.baseDir}/lorem-ipsum-generator`}>
-                  <i className="fas fa-file-alt fa-fw"></i>Lorem Ipsum
+                  <i className="fas fa-file-alt fa-fw"></i>Lorem Ipsum Generator
                 </Link>
               </li>
             </ul>
@@ -86,17 +106,29 @@ class App extends Component<Props, State> {
                 <i className="fas fa-bars"></i>
               </span>
               <span className="title">
-                Programmers&apos; Toolbox by <a href="https://twitter.com/chinhdo">Chinh Do</a>
+                Programmer&apos;s Toolbox by <a href="https://twitter.com/chinhdo">Chinh Do</a>
               </span>
             </header>
             <Switch>
               <Route path={`${this.baseDir}/guid-generator`}>
                 <HomePage />
               </Route>
+              <Route path={`${this.baseDir}/uuid-generator`}>
+                <HomePage />
+              </Route>
               <Route path={`${this.baseDir}/url-encoder`}>
                 <EncodingPage />
               </Route>
+              <Route path={`${this.baseDir}/html-encoder`}>
+                <EncodingPage />
+              </Route>
+              <Route path={`${this.baseDir}/base64-encoder`}>
+                <EncodingPage />
+              </Route>
               <Route path={`${this.baseDir}/md5-hash-generator`}>
+                <CryptoPage />
+              </Route>
+              <Route path={`${this.baseDir}/sha-256-hash-generator`}>
                 <CryptoPage />
               </Route>
               <Route path={`${this.baseDir}/lorem-ipsum-generator`}>

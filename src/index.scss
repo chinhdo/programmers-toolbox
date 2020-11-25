@@ -14,16 +14,21 @@ h1 {
   padding: 0px 0px 10px 0px;
 }
 
-h3 {
-  font-size: 1.5rem;
-}
-
-h3 {
+h2 {
   font-size: 1.25rem;
 }
 
-code {
+h3 {
+  font-size: 1.15rem;
+  font-weight: 300;
+}
+
+.code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+pre {
+  color: green;
 }
 
 a {

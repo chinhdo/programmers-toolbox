@@ -30,7 +30,6 @@ class HomePage extends Component<Props, State> {
   componentDidMount(): void {
     this.uuid();
     this.short();
-    document.title = 'GUID Generator / UUID Generator & Other Programmer&apos;s Tools';
   }
 
   copy(idx: number): void {
@@ -55,6 +54,9 @@ class HomePage extends Component<Props, State> {
   }
 
   render(): React.ReactNode {
+    const name = window.location.pathname.endsWith('uuid-generator') ? 'UUID' : 'GUID';
+    document.title = name + ' Generator';
+
     const uuids = [];
     for (let i = 0; i < this.state.uuids.length; i++) {
       uuids.push(
@@ -72,13 +74,13 @@ class HomePage extends Component<Props, State> {
 
     return (
       <div className="HomePage">
-        <h1>GUID Generator, URL/HTML Encoders & Other Programmer&apos;s Tools</h1>
+        <h1>{name} Generator</h1>
 
         <div className="UuidGen">
-          <button className="btn btn-outline-primary btn-sm" onClick={this.uuid} title="Generate a UUID/GUID">
-            GUID
+          <button className="btn btn-outline-primary btn-sm" onClick={this.uuid} title="Generate a ${name}">
+            {name}
           </button>
-          <button className="btn btn-outline-primary btn-sm" onClick={this.short} title="Generate a short UUID">
+          <button className="btn btn-outline-primary btn-sm" onClick={this.short} title="Generate a short {name}">
             Short
           </button>
           <button className="btn btn-outline-secondary btn-sm" onClick={this.clear}>
@@ -89,16 +91,30 @@ class HomePage extends Component<Props, State> {
               <code>{uuids}</code>
             </ul>
             <div className="info">
-              <p>We&apos;ve created a standard v4 GUID/UUID and a short GUID/UUID for you.</p>
               <p>
-                Click on the GUID button to generate a <a href="http://www.ietf.org/rfc/rfc4122.txt">RFC4122</a>{' '}
-                GUID/UUID. This generator uses the <a href="https://www.npmjs.com/package/uuid">uuid</a> npm package
-                behind the scene. Version-4 UUIDs are generated using a random or pseudo-random number.
+                This page generates <a href="http://www.ietf.org/rfc/rfc4122.txt">RFC4122</a> {name}&apos;s (also known
+                as UUID&apos;s). The <a href="https://www.npmjs.com/package/uuid">uuid</a> npm package is used behind
+                the scene. Version-4 {name}&apos;s are generated using a random or pseudo-random number. GUID&apos;s and
+                UUID&apos;s are the same things.
               </p>
               <p>
-                Click on the Short button to generate a shorter format UUID (based on the{' '}
+                The &quot;Short&quot; button generates a shorter/compact format {name} (based on the{' '}
                 <a href="https://www.npmjs.com/package/short-uuid">short-uuid</a> npm package.)
               </p>
+              <h2>Frequently Asked Questions about {name}&apos;s</h2>
+              <h3>How to generate {name}&apos;s in JavaScript</h3>
+              <p>
+                JavaScript doesn&apos;t have a built in {name} generator. Use the{' '}
+                <a href="https://www.npmjs.com/package/uuid">UUID npm package:</a>
+              </p>
+              <pre>{`import { v4 as uuidv4 } from 'uuid';
+uuidv4(); // ⇨ '909f6853-d097-47f1-9e99-d557ced603e4'`}</pre>
+              <h3>How to generate {name}&apos;s in Java</h3>
+              <pre>UUID uuid = UUID.randomUUID();</pre>
+              <h3>How to generate {name}&apos;s in SQL</h3>
+              <pre>SELECT NEWID() AS GUID;</pre>
+              <h3>How to generate {name}&apos;s in C#</h3>
+              <pre>Guid id = Guid.NewGuid();</pre>
             </div>
           </div>
         </div>
