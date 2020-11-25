@@ -38,6 +38,10 @@ class EncodingPage extends BaseComponent<Props, State> {
     this.saveStateToLocalStorage = this.saveStateToLocalStorage.bind(this);
   }
 
+  componentDidMount(): void {
+    document.title = 'HTML Encoder/Decoder, URL Encoder/Decoder & Base64 Encoder/Decoder';
+  }
+
   decode(): void {
     let decoded: string;
     switch (this.state.encodeType) {

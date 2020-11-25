@@ -30,6 +30,7 @@ class HomePage extends Component<Props, State> {
   componentDidMount(): void {
     this.uuid();
     this.short();
+    document.title = 'GUID Generator / UUID Generator & Other Programmer&apos;s Tools';
   }
 
   copy(idx: number): void {

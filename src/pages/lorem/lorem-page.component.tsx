@@ -28,6 +28,7 @@ class LoremPage extends React.Component<Props, State> {
 
   componentDidMount(): void {
     this.generate();
+    document.title = 'Lorem Ipsum text generator';
   }
 
   generate(): void {

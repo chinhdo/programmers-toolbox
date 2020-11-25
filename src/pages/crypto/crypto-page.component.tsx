@@ -36,6 +36,10 @@ class CryptoPage extends BaseComponent<Props, State> {
     this.saveStateToLocalStorage = this.saveStateToLocalStorage.bind(this);
   }
 
+  componentDidMount(): void {
+    document.title = 'MD5 and SHA-256 Hash Generator';
+  }
+
   hash(): void {
     let hashed = '';
     switch (this.state.hashType) {
@@ -146,7 +150,7 @@ class CryptoPage extends BaseComponent<Props, State> {
 
     return (
       <div className="EncodingPage">
-        <h1>Hash Generator</h1>
+        <h1>MD5 and SHA-256 Hash Generator</h1>
         <p>MD5 hash generator. SHA-256 hash generator. Generate SHA 256, MD5 hashes online.</p>
         <div>
           <label htmlFor="sha256Option">
