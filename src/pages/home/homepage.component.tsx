@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import './homepage.styles.scss';
-import { Link } from 'react-router-dom';
-import Logo from '../../components/shared/logo.component';
 import { v4 as uuidv4 } from 'uuid';
 import short from 'short-uuid';
 import CopyToClipboard from 'react-copy-to-clipboard';
