@@ -1,16 +1,11 @@
 Programmer's Toolbox is a web site hosting various tools for the programmer.
 
-There are free online tools for most of these things out there already, but many of them are cumbersome to use, has outdated UI, or is server-rendered. This app will be entirely client-side rendered, with a modern UI. The app will support optional account creation so that settings can be saved.
+There are free online tools for most of these things out there already, but many of them are cumbersome to use, has outdated UI, or is server-rendered. This app will be entirely client-side rendered, with a modern UI.
 
 Programmer's Toolbox is hosted at [https://www.chinhdo.com/tools](https://www.chinhdo.com/tools).
 
 ## Misc TODOs
-* Google Analytics
 * Logos in manifest.json - do I need them?
-* When minimized - still show a thin sidebar
-* Lazy modules
-* SEO
-* Usage metrics (which tools is used the most - order by usage)
 
 Notes
 * Expandable sidebar based on [Bootstrap Sidebar](https://bootstrapious.com/p/bootstrap-sidebar)
