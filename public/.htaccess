@@ -1,6 +1,7 @@
 Redirect /tools/uuid /tools/uuid-generator
 Redirect /tools/hash /tools/md5-hash-generator
 Redirect /tools/encode /tools/html-encoder
+Redirect /tools/lorem-ipsum /tools/lorem-ipsum-generator
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
