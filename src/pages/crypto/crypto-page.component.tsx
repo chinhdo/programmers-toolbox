@@ -36,6 +36,10 @@ class CryptoPage extends BaseComponent<Props, State> {
     this.saveStateToLocalStorage = this.saveStateToLocalStorage.bind(this);
   }
 
+  componentDidMount():void {
+    
+  }
+
   hash(): void {
     let hashed = '';
     switch (this.state.hashType) {
