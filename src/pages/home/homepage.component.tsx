@@ -119,7 +119,7 @@ uuidv4(); // ⇨ '909f6853-d097-47f1-9e99-d557ced603e4'`}</pre>
               <h3>How to generate {name}&apos;s in C#</h3>
               <pre>Guid id = Guid.NewGuid();</pre>
               <h3>How to generate {name}&apos;s in PowerShell</h3>
-              <pre>{`PS C:\Users\cdo> [Guid]::newguid()
+              <pre>{`PS > [Guid]::newguid()
 Guid
 ----
 a4e7b9c0-d0cb-4fb0-a8fe-20445557566e`}
