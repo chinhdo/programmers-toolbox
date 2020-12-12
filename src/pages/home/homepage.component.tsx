@@ -90,7 +90,7 @@ class HomePage extends Component<Props, State> {
             Clear
           </button>
           <div className="output">
-            <ul>
+            <ul className="guids">
               <code>{uuids}</code>
             </ul>
             <div className="info">
