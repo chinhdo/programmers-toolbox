@@ -21,7 +21,7 @@ export class Footer extends Component<Props, State> {
         </div>
         <div className="Footer">
           <h3>About this app</h3>
-          <p>Version: 0.60.</p>
+          <p>Version: 0.61.</p>
           <p>
             By <a href="https://www.chinhdo.com">Chinh Do</a>. Contact Chinh on{' '}
             <a href="https://twitter.com/chinhdo">Twitter</a> if you find an issue or have a suggestion.

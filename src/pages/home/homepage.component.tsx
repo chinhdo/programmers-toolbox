@@ -118,6 +118,17 @@ uuidv4(); // ⇨ '909f6853-d097-47f1-9e99-d557ced603e4'`}</pre>
               <pre>SELECT NEWID() AS GUID;</pre>
               <h3>How to generate {name}&apos;s in C#</h3>
               <pre>Guid id = Guid.NewGuid();</pre>
+              <h3>How to generate {name}&apos;s in PowerShell</h3>
+              <pre>{`PS C:\Users\cdo> [Guid]::newguid()
+Guid
+----
+a4e7b9c0-d0cb-4fb0-a8fe-20445557566e`}
+              </pre>
+              <h3>How to generate {name}&apos;s in Bash shell</h3>
+              <p>Use the uuidgen program. This works in Ubuntu 18.04 &amp; 20.04.</p>
+              <pre>{`$ uuidgen
+17581b85-3e3b-453d-b614-af8ebe069cb4`}
+              </pre>
             </div>
           </div>
         </div>
